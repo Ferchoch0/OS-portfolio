@@ -1,0 +1,40 @@
+.wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border-dark);
+    border-bottom: 1px solid var(--border-dark);
+    padding: 16px 0;
+    background: var(--ink);
+}
+
+.track {
+    display: flex;
+    white-space: nowrap;
+}
+
+.track:hover {
+    animation-play-state: paused !important;
+}
+
+.item {
+    font-family: var(--mono);
+    font-size: .62rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(245, 242, 236, .2);
+    padding: 0 28px;
+    flex-shrink: 0;
+}
+
+.accent {
+    color: var(--violet2);
+}
+
+@keyframes marqueeScroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}

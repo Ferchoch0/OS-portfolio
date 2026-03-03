@@ -1,0 +1,29 @@
+.dot,
+.ring {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+}
+
+.dot {
+    width: 5px;
+    height: 5px;
+    background: var(--paper);
+    border-radius: 50%;
+    mix-blend-mode: difference;
+}
+
+.ring {
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(245, 242, 236, .35);
+    border-radius: 50%;
+    transition: width .25s, height .25s, border-color .25s;
+}
+
+:global(body.hovered) .ring {
+    width: 50px;
+    height: 50px;
+    border-color: var(--violet2);
+}

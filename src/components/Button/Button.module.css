@@ -1,0 +1,136 @@
+/* ── PRIMARY ── */
+.primary {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 14px 32px;
+    transition: all .25s;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border: none;
+}
+
+.primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--violet);
+    transform: translateX(-101%);
+    transition: transform .3s ease;
+    z-index: 0;
+}
+
+.primary span {
+    position: relative;
+    z-index: 1;
+}
+
+.primary:hover {
+    color: var(--paper);
+}
+
+.primary:hover::after {
+    transform: translateX(0);
+}
+
+/* ── TEXT ── */
+.text {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(245, 242, 236, .38);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(245, 242, 236, .15);
+    padding-bottom: 2px;
+    transition: all .25s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.text:hover {
+    color: var(--paper);
+    border-bottom-color: var(--paper);
+}
+
+/* ── INK ── */
+.ink {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 12px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all .25s;
+    position: relative;
+    overflow: hidden;
+    border: none;
+}
+
+.ink::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--violet);
+    transform: translateX(-101%);
+    transition: transform .3s;
+    z-index: 0;
+}
+
+.ink span {
+    position: relative;
+    z-index: 1;
+}
+
+.ink:hover::before {
+    transform: translateX(0);
+}
+
+/* ── BLUE ── */
+.blue {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 12px 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all .25s;
+    position: relative;
+    overflow: hidden;
+    background: none;
+}
+
+.blue::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--blue);
+    transform: translateX(-101%);
+    transition: transform .3s;
+    z-index: -1;
+}
+
+.blue:hover {
+    color: var(--paper);
+}
+
+.blue:hover::before {
+    transform: translateX(0);
+}

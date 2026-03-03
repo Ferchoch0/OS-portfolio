@@ -1,0 +1,64 @@
+.logo {
+    font-family: var(--mono);
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-decoration: none;
+    color: var(--paper);
+    position: relative;
+    display: inline-block;
+}
+
+.base {
+    display: inline-block;
+}
+
+.glitch {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--violet2);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.logo:hover .glitch {
+    animation: logoGlitch .55s steps(1) forwards;
+}
+
+@keyframes logoGlitch {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+        clip-path: inset(20% 0 40% 0);
+        color: var(--violet2);
+    }
+
+    15% {
+        transform: translateX(3px);
+        clip-path: inset(55% 0 10% 0);
+        color: var(--red);
+    }
+
+    30% {
+        transform: translateX(-2px);
+        clip-path: inset(10% 0 60% 0);
+        color: var(--blue);
+    }
+
+    50% {
+        transform: translateX(4px);
+        clip-path: inset(0 0 80% 0);
+        color: var(--violet2);
+    }
+
+    70% {
+        transform: translateX(-3px);
+        clip-path: inset(70% 0 0 0);
+        opacity: .5;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}

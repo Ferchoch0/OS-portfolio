@@ -1,0 +1,172 @@
+.split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border-light);
+}
+
+/* ── Nav buttons ── */
+.nav {
+    border-right: 1px solid var(--border-light);
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 40px;
+    border: none;
+    border-bottom: 1px solid var(--border-light);
+    cursor: none;
+    transition: background .25s;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
+}
+
+.btn:last-child {
+    border-bottom: none;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--violet);
+    transform: scaleY(0);
+    transition: transform .3s ease;
+    transform-origin: bottom;
+}
+
+.btn.active,
+.btn:hover {
+    background: var(--paper2);
+}
+
+.btn.active::before,
+.btn:hover::before {
+    transform: scaleY(1);
+}
+
+.btnNum {
+    font-family: var(--mono);
+    font-size: .58rem;
+    color: var(--muted);
+    letter-spacing: .1em;
+    min-width: 28px;
+}
+
+.btnName {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--ink);
+    flex: 1;
+    padding: 0 20px;
+    transition: color .25s;
+}
+
+.btn.active .btnName,
+.btn:hover .btnName {
+    color: var(--violet);
+}
+
+.btnArrow {
+    font-size: .8rem;
+    color: var(--muted);
+    transition: transform .25s, color .25s;
+}
+
+.btn.active .btnArrow {
+    transform: translateX(4px);
+    color: var(--violet);
+}
+
+/* ── Panel ── */
+.panel {
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.panelContent {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity .25s, transform .25s;
+}
+
+.panelContent.hiding {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.panelNum {
+    font-size: 8rem;
+    font-weight: 300;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(14, 13, 13, .08);
+    letter-spacing: -.04em;
+    margin-bottom: 16px;
+    user-select: none;
+    transition: all .4s;
+}
+
+.panelName {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+    transition: all .3s;
+}
+
+.panelDesc {
+    font-family: var(--mono);
+    font-size: .78rem;
+    line-height: 1.85;
+    color: var(--muted);
+    margin-bottom: 32px;
+    max-width: 340px;
+    transition: all .3s;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+    .nav {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .btn {
+        padding: 20px 24px;
+    }
+
+    .panel {
+        padding: 32px 24px;
+        min-height: auto;
+    }
+
+    .panelNum {
+        font-size: 4rem;
+    }
+}

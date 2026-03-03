@@ -1,0 +1,139 @@
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes otterReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .2;
+    }
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.reveal-delay-1 {
+    transition-delay: .1s;
+}
+
+.reveal-delay-2 {
+    transition-delay: .2s;
+}
+
+.reveal-delay-3 {
+    transition-delay: .3s;
+}
+
+/* ── SECTION THEMES ── */
+.section-light {
+    background: var(--paper);
+    color: var(--ink);
+    padding: 120px 56px;
+}
+
+.section-dark {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 120px 56px;
+}
+
+/* ── SECTION LABELS ── */
+.s-label {
+    font-family: var(--mono);
+    font-size: .62rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-light .s-label {
+    color: var(--muted);
+}
+
+.section-dark .s-label {
+    color: rgba(245, 242, 236, .3);
+}
+
+.s-label::after {
+    content: '';
+    height: 1px;
+    flex: 1;
+    max-width: 120px;
+}
+
+.section-light .s-label::after {
+    background: var(--border-light);
+}
+
+.section-dark .s-label::after {
+    background: var(--border-dark);
+}
+
+/* ── SECTION TITLES ── */
+.s-title {
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 300;
+    letter-spacing: -.02em;
+    line-height: 1.05;
+    margin-bottom: 72px;
+}
+
+.s-title em {
+    font-style: italic;
+}
+
+.section-light .s-title em {
+    color: var(--muted);
+}
+
+.section-dark .s-title em {
+    color: rgba(245, 242, 236, .3);
+}
