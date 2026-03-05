@@ -11,6 +11,10 @@
     transition: all .4s;
 }
 
+.logo {
+    width: 50px;
+} 
+
 .scrolled {
     background: rgba(14, 13, 13, .85);
     backdrop-filter: blur(16px);

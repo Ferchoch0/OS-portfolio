@@ -2,8 +2,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: auto auto;
-    gap: 2px;
-    background: var(--border-light);
+    gap: 5px;
 }
 
 .card {
@@ -35,12 +34,18 @@
 .thumbBg {
     position: absolute;
     inset: 0;
-    opacity: 0;
-    transition: opacity .4s;
+    opacity: 1;
+    background: linear-gradient(135deg, #1f1f1f, #0a0a0a);
+    z-index: 0;
 }
 
-.card:hover .thumbBg {
-    opacity: 1;
+.coverImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
 }
 
 .thumbLabel {

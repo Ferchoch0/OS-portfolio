@@ -1,8 +1,10 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import CustomCursor from '../CustomCursor/CustomCursor';
+
+const Chatbot = lazy(() => import('../Chatbot/Chatbot'));
 
 export default function Layout() {
     const { pathname } = useLocation();
@@ -20,6 +22,9 @@ export default function Layout() {
                 <Outlet />
             </main>
             <Footer />
+            <Suspense fallback={null}>
+                <Chatbot />
+            </Suspense>
         </>
     );
 }

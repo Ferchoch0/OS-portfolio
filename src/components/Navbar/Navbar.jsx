@@ -36,7 +36,7 @@ export default function Navbar() {
 
     return (
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-            <GlitchLogo />
+            <img src="/logo_blanco.png" alt="" className={styles.logo} />
 
             <button
                 className={styles.menuToggle}

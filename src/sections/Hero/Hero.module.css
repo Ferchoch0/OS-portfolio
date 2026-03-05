@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 .hero {
     min-height: 100vh;
     display: grid;
@@ -33,17 +35,47 @@
     }
 }
 
-/* ── Otter SVG ── */
+/* ── Otter / Sphere ── */
 .otter {
     position: absolute;
     right: -20px;
-    bottom: 0;
+    bottom: 10;
     width: 55vw;
-    max-width: 780px;
+    max-width: 700px;
     opacity: 0;
     animation: otterReveal 1.2s .6s forwards;
     pointer-events: none;
     filter: drop-shadow(0 0 60px rgba(107, 63, 160, .12));
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.heroSphere {
+    width: clamp(225px, 26.25vw, 675px);
+    height: clamp(225px, 26.25vw, 675px);
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #7e4ef8 0%, #5a36b0 40%, #3a2466 70%, #24163b 100%);
+    position: relative;
+    z-index: 1;
+}
+
+.heroSphere::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(375px, 41.25vw, 1050px);
+    height: clamp(375px, 41.25vw, 1050px);
+    background-image: url("/public/otter-hero.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
 }
 
 .otter svg {
@@ -78,28 +110,267 @@
     background: var(--violet2);
 }
 
-/* ── Title ── */
-.title {
-    font-size: clamp(3.8rem, 6.5vw, 7rem);
-    font-weight: 300;
-    line-height: .96;
-    letter-spacing: -.02em;
+/* ── Title Wrap ── */
+.titleWrap {
+    display: inline-flex;
+    flex-direction: column;
     margin-bottom: 48px;
     opacity: 0;
     animation: fadeUp .8s .45s forwards;
 }
 
-.title em {
-    font-style: italic;
-    color: rgba(245, 242, 236, .3);
+/* ── Title (Glitch) ── */
+.glitch {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4.5rem, 9vw, 11rem);
+    font-weight: 400;
+    letter-spacing: .06em;
+    line-height: .88;
+    position: relative;
+    display: inline-block;
+    color: var(--paper);
+    margin: 0;
+    text-shadow: 0 1px 12px rgba(107, 63, 160, .15);
+    animation: flicker 3s infinite;
 }
 
-.accent {
-    display: block;
-    background: linear-gradient(90deg, var(--violet), var(--blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: transparent;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+    opacity: 0.5;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--violet2);
+    animation: glitchTop 2.5s infinite linear alternate-reverse;
+    color: var(--violet2);
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--violet), 2px 2px var(--violet2);
+    animation: glitchBottom 2s infinite linear alternate-reverse;
+    color: rgba(245, 242, 236, .28);
+}
+
+/* ── O ↔ U letter swap ── */
+.glitchLetter {
+    position: relative;
+    display: inline-block;
+}
+
+.letterO {
+    display: inline-block;
+    animation: hideO 6s infinite;
+}
+
+.letterU {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    color: var(--violet2);
+    animation: showU 6s infinite;
+    pointer-events: none;
+}
+
+.dot {
+    color: var(--violet2);
+    animation: flicker 3s infinite;
+}
+
+@keyframes hideO {
+
+    0%,
+    80%,
+    94%,
+    100% {
+        opacity: 1;
+    }
+
+    82% {
+        opacity: 0;
+    }
+
+    84% {
+        opacity: 0.2;
+    }
+
+    86% {
+        opacity: 0;
+    }
+
+    92% {
+        opacity: 1;
+    }
+}
+
+@keyframes showU {
+
+    0%,
+    80%,
+    94%,
+    100% {
+        opacity: 0;
+        transform: none;
+    }
+
+    81% {
+        opacity: 0;
+    }
+
+    82% {
+        opacity: 0.8;
+        transform: translateX(1px) translateY(-1px);
+    }
+
+    83% {
+        opacity: 1;
+        transform: translateX(-1px);
+    }
+
+    84% {
+        opacity: 0.3;
+        transform: translateX(2px) translateY(1px);
+    }
+
+    85% {
+        opacity: 1;
+        transform: none;
+    }
+
+    86% {
+        opacity: 0.7;
+        transform: translateX(-2px);
+    }
+
+    87% {
+        opacity: 1;
+        transform: translateX(1px) translateY(-1px);
+    }
+
+    89% {
+        opacity: 0.5;
+        transform: none;
+    }
+
+    92% {
+        opacity: 0;
+    }
+}
+
+/* ── Rotating word below title ── */
+.rotatingWord {
+    align-self: flex-end;
+    font-family: var(--mono);
+    font-size: .8rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(245, 242, 236, .3);
+    margin-top: -4px;
+    transition: opacity .4s ease, transform .4s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fading {
+    opacity: 0 !important;
+    transform: translateY(6px) !important;
+}
+
+/* ── Glitch keyframes ── */
+@keyframes glitchTop {
+    0% {
+        clip: rect(0, 9999px, 0, 0);
+    }
+
+    5% {
+        clip: rect(5px, 9999px, 25px, 0);
+        transform: translate(-3px, -2px);
+    }
+
+    10% {
+        clip: rect(50px, 9999px, 90px, 0);
+        transform: translate(3px, 0);
+    }
+
+    15% {
+        clip: rect(30px, 9999px, 60px, 0);
+        transform: translate(-5px, 2px);
+    }
+
+    20% {
+        clip: rect(80px, 9999px, 120px, 0);
+        transform: translate(5px, -2px);
+    }
+
+    100% {
+        clip: rect(0, 9999px, 0, 0);
+        transform: none;
+    }
+}
+
+@keyframes glitchBottom {
+    0% {
+        clip: rect(0, 9999px, 0, 0);
+    }
+
+    5% {
+        clip: rect(60px, 9999px, 100px, 0);
+        transform: translate(3px, 2px);
+    }
+
+    10% {
+        clip: rect(20px, 9999px, 70px, 0);
+        transform: translate(-3px, 0);
+    }
+
+    15% {
+        clip: rect(40px, 9999px, 80px, 0);
+        transform: translate(4px, -2px);
+    }
+
+    20% {
+        clip: rect(10px, 9999px, 50px, 0);
+        transform: translate(-4px, 2px);
+    }
+
+    100% {
+        clip: rect(0, 9999px, 0, 0);
+        transform: none;
+    }
+}
+
+@keyframes flicker {
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        opacity: 1;
+    }
+
+    20%,
+    24%,
+    55% {
+        opacity: 0.6;
+    }
+
+    22% {
+        opacity: 0.3;
+    }
 }
 
 /* ── Subtitle ── */
@@ -185,8 +456,8 @@
 }
 
 @media (max-width: 480px) {
-    .title {
-        font-size: clamp(2.4rem, 10vw, 3.5rem);
+    .glitch {
+        font-size: clamp(2.8rem, 14vw, 4.5rem);
     }
 
     .actions {

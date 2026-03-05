@@ -1,14 +1,18 @@
 :root {
-  --ink:     #0e0d0d;
-  --paper:   #f5f2ec;
-  --paper2:  #edeae2;
-  --violet:  #6b3fa0;
+  --ink: #0e0d0d;
+  --paper: #f5f2ec;
+  --paper2: #edeae2;
+  --violet: #6b3fa0;
   --violet2: #8b5cc8;
-  --blue:    #2255cc;
-  --red:     #c0282c;
-  --muted:   #8a8070;
-  --border-dark:  rgba(255,255,255,0.08);
-  --border-light: rgba(14,13,13,0.1);
+  --primary: #7e4ef8;
+  --secondary: #b46cf9;
+  --tertiary: #d69cfb;
+  --blue: #2255cc;
+  --red: #c0282c;
+  --muted: #8a8070;
+  --text-light: #FFFFFF;
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(14, 13, 13, 0.1);
   --serif: 'Cormorant Garamond', Georgia, serif;
-  --mono:  'DM Mono', monospace;
+  --mono: 'DM Mono', monospace;
 }
