@@ -1,0 +1,644 @@
+/* ════════════════════════════════════════════
+   SECCIÓN: NUESTRO EQUIPO (TEAM)
+   ════════════════════════════════════════════ */
+.team-section {
+    padding: 140px 56px;
+    background-color: var(--paper, #fafafa);
+    background-image:
+        radial-gradient(var(--border, rgba(0, 0, 0, 0.03)) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-family: var(--sans, sans-serif);
+    overflow: hidden;
+}
+
+/* ── Contenedor General ── */
+.team-wrapper {
+    max-width: 1240px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 10;
+}
+
+/* ── Cabecera de la Sección (Badge y Títulos) ── */
+.team-top {
+    text-align: center;
+    margin-bottom: 72px;
+}
+
+.team-badge {
+    font-family: var(--mono, monospace);
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 7px 18px;
+    border: 1px solid var(--violet);
+    border-radius: 40px;
+    color: var(--violet);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.team-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--violet);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--violet);
+    animation: dot-glow 2s ease-in-out infinite;
+}
+
+@keyframes dot-glow {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.team-main-title {
+    font-family: var(--serif, serif);
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.team-main-em {
+    font-style: italic;
+    color: var(--violet);
+}
+
+/* ════════════════════════════════════════════
+   SECCIÓN DE INFORMACIÓN (VISIÓN Y VALORES)
+   ════════════════════════════════════════════ */
+.team-info-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+/* ════════════════════════════════════════════
+   DIVISORES Y SUBTÍTULOS DECORADOS
+   ════════════════════════════════════════════ */
+.section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.divider-line {
+    height: 2.5px;
+    flex: 1;
+    background: linear-gradient(180deg, transparent, var(--violet-light, rgba(107, 63, 160, 0.3)), transparent);
+}
+
+.divider-icon {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.divider-icon.divider-img-wrap {
+    width: 85px;
+    height: 85px;
+}
+
+.decorated-subtitle {
+    font-family: var(--serif, serif);
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 48px 0;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.decorated-subtitle span {
+    color: var(--violet);
+    font-style: italic;
+}
+
+.team-wrapper.visible .section-divider {
+    animation: fade-up-header 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.1s;
+}
+
+.team-wrapper.visible .decorated-subtitle {
+    animation: fade-up-header 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: 0.25s;
+}
+
+@keyframes fade-up-header {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Cuadrícula de Beneficios/Confianza ── */
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    width: 100%;
+}
+
+/* ── Tarjetas de Confianza indivuduales ── */
+.trust-card {
+    border: 2px solid var(--border-light);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.trust-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    border-radius: 4px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--violet), var(--blue));
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+}
+
+/* Capa de brillo al pasar el cursor */
+.trust-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+            transparent 40%,
+            rgba(107, 63, 160, 0.03) 50%,
+            transparent 60%);
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.trust-card:hover {
+    border-color: color-mix(in srgb, var(--violet) 25%, transparent);
+    background: #ffffff;
+    box-shadow: 0 12px 32px rgba(107, 63, 160, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+    transform: translateY(-4px);
+}
+
+.trust-card:hover::before {
+    width: 60%;
+}
+
+.trust-card:hover::after {
+    opacity: 1;
+    animation: tm-shimmer 2s ease-in-out infinite;
+}
+
+.trust-card-icon {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+
+.trust-card-icon svg,
+.trust-card-icon img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trust-card:hover .trust-card-icon {
+    transform: translateY(-4px);
+}
+
+.trust-card:hover .trust-card-icon svg,
+.trust-card:hover .trust-card-icon img {
+    transform: scale(1.1);
+}
+
+.trust-card-content h4 {
+    font-family: var(--sans, sans-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.5px;
+    margin: 0 0 8px 0;
+    transition: color 0.3s ease;
+}
+
+.trust-card:hover .trust-card-content h4 {
+    color: var(--violet);
+}
+
+.trust-card-content p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+}
+
+/* ════════════════════════════════════════════
+   SECCIÓN DE MIEMBROS DEL EQUIPO
+   ════════════════════════════════════════════ */
+.team-members-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tm-cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+}
+
+/* ════════════════════════════════════════════
+   TARJETAS DE EQUIPO - Diseño Editorial
+   ════════════════════════════════════════════ */
+
+/* Animación de entrada escalonada */
+@keyframes tm-rise {
+    from {
+        opacity: 0;
+        transform: translateY(45px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Efecto de brillo (shimmer) al pasar el cursor */
+@keyframes tm-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ── Tarjeta: Contenedor estructural transparente ── */
+.tm-card {
+    --c-accent: var(--violet);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: default;
+    animation: tm-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.tm-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.tm-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.tm-card:nth-child(3) {
+    animation-delay: 0.35s;
+}
+
+.tm-card:nth-child(4) {
+    animation-delay: 0.5s;
+}
+
+/* ── Imagen: Flota sobre la información ── */
+.tm-card-img {
+    display: block;
+    max-width: 240px;
+    object-fit: contain;
+    object-position: bottom center;
+    filter: drop-shadow(0 10px 24px rgba(107, 63, 160, 0.18));
+    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.5s ease;
+    position: relative;
+    z-index: 2;
+    /* Overlap into the info block for fusion */
+    margin-bottom: -20px;
+}
+
+.tm-card:hover .tm-card-img {
+    transform: scale(1.08) translateY(-8px);
+    filter: drop-shadow(0 18px 36px rgba(107, 63, 160, 0.28)) drop-shadow(0 0 20px color-mix(in srgb, var(--c-accent) 18%, transparent));
+}
+
+/* ── Bloque de Info: Fondo blanco y bordes suaves ── */
+.tm-card-info-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 330px;
+    height: 140px;
+}
+
+.tm-card:hover {
+    z-index: 10;
+}
+
+.tm-card-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    padding: 36px 28px 22px;
+    text-align: center;
+    overflow: hidden;
+    transition: border-color 0.4s ease,
+        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tm-card:hover .tm-card-info {
+    border-color: color-mix(in srgb, var(--c-accent) 35%, transparent);
+    box-shadow:
+        0 16px 48px rgba(107, 63, 160, 0.1),
+        0 4px 16px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+}
+
+/* Línea de acento superior que se expande al hover */
+.tm-card-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: linear-gradient(90deg, var(--c-accent), color-mix(in srgb, var(--c-accent) 40%, #fff));
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tm-card:hover .tm-card-info::before {
+    width: 100%;
+}
+
+/* Capa de brillo al pasar el cursor */
+.tm-card-info::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+            transparent 40%,
+            rgba(107, 63, 160, 0.04) 50%,
+            transparent 60%);
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.tm-card:hover .tm-card-info::after {
+    opacity: 1;
+    animation: tm-shimmer 1.8s ease-in-out infinite;
+}
+
+/* Nombre del Miembro */
+.tm-card-name {
+    font-family: var(--serif, serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.35s ease;
+}
+
+.tm-card:hover .tm-card-name {
+    color: var(--c-accent);
+}
+
+/* Rol / Cargo */
+.tm-card-role {
+    font-family: var(--mono, monospace);
+    font-size: 0.58rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.35s ease;
+}
+
+.tm-card:hover .tm-card-role {
+    color: var(--c-accent);
+}
+
+/* Divisor entre rol y descripción */
+.tm-card-role::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--border-light);
+    margin: 10px auto 0;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        background 0.4s ease;
+}
+
+.tm-card:hover .tm-card-role::after {
+    width: 60px;
+    background: var(--c-accent);
+}
+
+/* Descripción: se expande al pasar el cursor */
+.tm-card-desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.4s ease 0.06s,
+        margin 0.4s ease;
+}
+
+.tm-card:hover .tm-card-desc {
+    max-height: 120px;
+    opacity: 1;
+    margin: 0 0 14px 0;
+}
+
+/* Fila de Enlaces: se revela al pasar el cursor */
+.tm-card-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+        opacity 0.4s ease 0.14s;
+}
+
+.tm-card:hover .tm-card-links {
+    max-height: 60px;
+    opacity: 1;
+}
+
+/* Botón de Portfolio: estilo delineado */
+.tm-card-btn {
+    font-family: var(--mono, monospace);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--c-accent);
+    text-decoration: none;
+    padding: 7px 16px;
+    border: 1px solid color-mix(in srgb, var(--c-accent) 40%, transparent);
+    border-radius: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.tm-card-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--c-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+.tm-card-btn:hover {
+    color: #ffffff;
+    border-color: var(--c-accent);
+}
+
+.tm-card-btn:hover::before {
+    transform: scaleX(1);
+}
+
+/* Iconos de Redes Sociales */
+.tm-card-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.tm-card-socials a {
+    color: var(--muted);
+    opacity: 0.45;
+    transition: color 0.3s ease,
+        opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+}
+
+.tm-card-socials a:hover {
+    color: var(--c-accent);
+    opacity: 1;
+    transform: scale(1.2) translateY(-2px);
+}
+
+.tm-card-socials a svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+}
+
+/* ════════════════════════════════════════════
+   ADAPTABILIDAD (RESPONSIVE)
+   ════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+    .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .team-section {
+        padding: 100px 24px;
+    }
+
+    .team-main-title {
+        font-size: 2rem;
+    }
+
+    .trust-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-intro {
+        font-size: 1rem;
+    }
+
+    .trust-card {
+        padding: 32px 24px;
+    }
+
+    .tm-card-img {
+        width: 48%;
+        max-width: 160px;
+    }
+
+    .tm-card-info-wrapper {
+        width: 100%;
+        max-width: 320px;
+        height: 130px;
+    }
+
+    .tm-card-info {
+        padding: 32px 20px 18px;
+    }
+
+    .tm-cards-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
