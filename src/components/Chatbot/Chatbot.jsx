@@ -14,6 +14,7 @@ function Chatbot() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
     const [isTyping, setIsTyping] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
 
     const sessionId = useRef(crypto.randomUUID());
     const messagesEnd = useRef(null);
@@ -30,6 +31,16 @@ function Chatbot() {
         if (isOpen) inputRef.current?.focus();
     }, [isOpen]);
 
+    // Popup timer
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (!hasGreeted.current && !isOpen) {
+                setShowPopup(true);
+            }
+        }, 6500); // 6.5 seconds delay
+        return () => clearTimeout(timer);
+    }, [isOpen]);
+
     const toggleOpen = useCallback(() => {
         setIsOpen((prev) => {
             const next = !prev;
@@ -37,6 +48,9 @@ function Chatbot() {
             if (next && !hasGreeted.current) {
                 hasGreeted.current = true;
                 setMessages([WELCOME_MSG]);
+            }
+            if (next) {
+                setShowPopup(false);
             }
             return next;
         });
@@ -94,10 +108,12 @@ function Chatbot() {
             <div className={`${s.window} ${isOpen ? s.windowOpen : ''}`}>
                 {/* Header */}
                 <div className={s.header}>
-                    <div className={s.avatar}>🦦</div>
+                    <div className={s.avatar}>
+                        <img src="/chatbot.png" alt="Cheko" className={s.avatarImg} />
+                    </div>
                     <div className={s.headerInfo}>
                         <div className={s.headerName}>Cheko</div>
-                        <div className={s.headerStatus}>Asistente OtterSolution</div>
+                        <div className={s.headerStatus}>Asistente en línea</div>
                     </div>
                     <button
                         className={s.closeBtn}
@@ -116,6 +132,9 @@ function Chatbot() {
                             className={`${s.msgRow} ${msg.role === 'bot' ? s.msgRowBot : s.msgRowUser
                                 }`}
                         >
+                            {msg.role === 'bot' && (
+                                <img src="/chatbot.png" alt="Cheko Logo" className={s.botMsgAvatar} />
+                            )}
                             <div
                                 className={`${s.bubble} ${msg.role === 'bot' ? s.bubbleBot : s.bubbleUser
                                     }`}
@@ -126,13 +145,16 @@ function Chatbot() {
                     ))}
 
                     {isTyping && (
-                        <div className={s.typing}>
-                            <span className={s.typingText}>Cheko está escribiendo</span>
-                            <span className={s.dots}>
-                                <span className={s.dot} />
-                                <span className={s.dot} />
-                                <span className={s.dot} />
-                            </span>
+                        <div className={`${s.msgRow} ${s.msgRowBot}`}>
+                            <img src="/chatbot.png" alt="Cheko Logo" className={s.botMsgAvatar} />
+                            <div className={s.typing}>
+                                <span className={s.typingText}>Cheko está escribiendo</span>
+                                <span className={s.dots}>
+                                    <span className={s.dot} />
+                                    <span className={s.dot} />
+                                    <span className={s.dot} />
+                                </span>
+                            </div>
                         </div>
                     )}
 
@@ -168,8 +190,13 @@ function Chatbot() {
                 onClick={toggleOpen}
                 aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat con Cheko'}
             >
-                {isOpen ? '✕' : '🦦'}
+                {isOpen ? '✕' : <img src="/chatbot.png" alt="Chatbot" className={s.fabImg} />}
             </button>
+
+            {/* Popup Message */}
+            <div className={`${s.popupMessage} ${showPopup && !isOpen ? s.popupMessageVisible : ''}`}>
+                ¿Puedo ayudarte en algo?
+            </div>
         </>
     );
 }
