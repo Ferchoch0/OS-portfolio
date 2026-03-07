@@ -1,22 +1,24 @@
+import { useState } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import Button from '../../components/Button/Button';
+import { Link } from 'react-router-dom';
 import styles from './ProjectsPreview.module.css';
 import { useScrollShrink } from '../../components/Image/ShrinkingHeader';
-import { useProjectData } from '../../hooks/useProjectData';
-import { useEffect } from 'react';
+import { getFeaturedProjects, getTotalProjectCount } from '../../data/projects';
+import TechBadge from '../../components/TechBadge/TechBadge';
+import ProjectModal from '../../components/ProjectModal/ProjectModal';
 
 export default function ProjectsPreview() {
     const { sectionRef, targetRef, progress, hasShrunk, rects } = useScrollShrink();
     const revealRef = useScrollReveal();
-    const { projects, loading, fetchProjectsByPosition } = useProjectData();
+    const [selectedProject, setSelectedProject] = useState(null);
 
-    useEffect(() => {
-        fetchProjectsByPosition();
-    }, [fetchProjectsByPosition]);
+    const allFeatured = getFeaturedProjects();
+    const totalCount = getTotalProjectCount();
+    const featuredCount = allFeatured.length;
 
-    const previewProjects = projects.slice(0, 3).map(p => ({
+    const previewProjects = allFeatured.map((p, i) => ({
         ...p,
-        large: p.home_position === "1" || p.home_position === 1,
+        large: i === 0,
     }));
     const largeProject = previewProjects.find(p => p.large);
 
@@ -42,76 +44,142 @@ export default function ProjectsPreview() {
             id="proyectos"
             style={{ padding: '120px 56px', position: 'relative' }}
         >
-            <p className="s-label reveal" ref={revealRef}>Trabajo real</p>
-            <h2 className="s-title reveal" ref={revealRef}>
-                Proyectos que <em>hablan</em><br />por nosotros.
-            </h2>
+            <div className={styles.header} ref={revealRef}>
+                <div className={styles.badge}>
+                    <span className={styles.badgeLine}></span>
+                    NUESTRO TRABAJO
+                </div>
+                <h2 className={styles.title}>
+                    Proyectos que <span className={styles.titleEm}>hablan</span><br />por nosotros.
+                </h2>
+            </div>
 
             <div className={styles.gallery} ref={revealRef}>
-                {!loading && previewProjects.map((project) => {
+                {previewProjects.map((project) => {
                     const isLarge = project.large;
                     const isPlaceholder = isLarge && !hasShrunk;
-                    const folderName = project.cover_url ? project.cover_url.split('/').filter(Boolean).pop() : '';
+                    const hasImage = project.images && project.images.length > 0;
 
                     return (
                         <div
                             key={project.id}
                             ref={isLarge ? targetRef : null}
                             className={`${styles.card} ${isLarge ? styles.large : ''}`}
-                            style={{ opacity: isPlaceholder ? 0 : 1 }}
+                            style={{ opacity: isPlaceholder ? 0 : 1, cursor: 'pointer' }}
+                            onClick={() => setSelectedProject(project)}
                         >
                             <div className={styles.thumb}>
-                                {project.cover_url ? (
+                                {hasImage ? (
                                     <img
-                                        src={`/${project.cover_url}${folderName}-1.png`}
+                                        src={project.images[0]}
                                         alt={project.name || project.title}
                                         className={styles.coverImage}
                                     />
                                 ) : (
                                     <div className={styles.thumbBg} />
                                 )}
+                                <div className={styles.overlay} />
                                 <span className={styles.cat}>{project.category}</span>
                                 <span className={styles.thumbLabel}>{project.label}</span>
-                            </div>
-                            <div className={styles.info}>
-                                <h4 className={styles.name}>{project.name}</h4>
-                                <p className={styles.blurb}>{project.blurb}</p>
+
+                                <div className={styles.hoverContent}>
+                                    <h4 className={styles.hoverTitle}>{project.name || project.title}</h4>
+                                    <p className={styles.hoverDesc}>
+                                        {project.description
+                                            ? project.description.length > 92
+                                                ? project.description.substring(0, 92) + '...'
+                                                : project.description
+                                            : project.description}
+                                    </p>
+                                    {project.stack && project.stack.length > 0 && (
+                                        <div className={styles.hoverTechs}>
+                                            {project.stack.map((tech) => (
+                                                <TechBadge key={tech} tech={tech} />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     );
                 })}
             </div>
 
-            {!loading && (
-                <div className={styles.cta} ref={revealRef}>
-                    <span className={styles.count}>Mostrando 3 de {projects.length}+ proyectos</span>
-                    <Button variant="ink" to="/project">Ver todos los proyectos</Button>
+            {/* ── CTA ── */}
+            <div className={styles.cta} ref={revealRef}>
+                <div className={styles.counterCard}>
+                    <div className={styles.counterStat}>
+                        <div className={styles.counterMeta}>
+                            <span className={styles.counterNum}>{featuredCount} mostrados</span>
+                            <span className={styles.counterLabel}>En vitrina ahora</span>
+                        </div>
+                    </div>
+                    <div className={styles.counterStat}>
+                        <div className={styles.counterMeta}>
+                            <span className={styles.counterNum}>{totalCount} proyectos</span>
+                            <span className={styles.counterLabel}>En el catálogo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <Link to="/project" className={styles.ctaBtn}>
+                    <span>Ver catálogo completo</span>
+                    <span className={styles.ctaArrow}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </span>
+                </Link>
+            </div>
+
+            {!hasShrunk && largeProject && (
+                <div
+                    style={{ ...floatingStyle, cursor: 'pointer' }}
+                    className={`${styles.card} ${styles.large}`}
+                    onClick={() => setSelectedProject(largeProject)}
+                >
+                    <div className={styles.thumb}>
+                        {largeProject.images && largeProject.images.length > 0 ? (
+                            <img
+                                src={largeProject.images[0]}
+                                alt={largeProject.name || largeProject.title}
+                                className={styles.coverImage}
+                            />
+                        ) : (
+                            <div className={styles.thumbBg} />
+                        )}
+                        <div className={styles.overlay} />
+                        <span className={styles.cat}>{largeProject.category}</span>
+                        <span className={styles.thumbLabel}>{largeProject.label}</span>
+
+                        <div className={styles.hoverContent}>
+                            <h4 className={styles.hoverTitle}>{largeProject.name || largeProject.title}</h4>
+                            <p className={styles.hoverDesc}>
+                                {largeProject.description
+                                    ? largeProject.description.length > 100
+                                        ? largeProject.description.substring(0, 100) + '...'
+                                        : largeProject.description
+                                    : largeProject.description}
+                            </p>
+                            {largeProject.stack && largeProject.stack.length > 0 && (
+                                <div className={styles.hoverTechs}>
+                                    {largeProject.stack.map((tech) => (
+                                        <TechBadge key={tech} tech={tech} />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             )}
 
-            {!loading && !hasShrunk && largeProject && (
-    <div style={floatingStyle} className={`${styles.card} ${styles.large}`}>
-        <div className={styles.thumb}>
-            {largeProject.cover_url ? (
-                <img
-                    src={`/${largeProject.cover_url}${largeProject.cover_url.split('/').filter(Boolean).pop()}-1.png`}
-                    alt={largeProject.name || largeProject.title}
-                    className={styles.coverImage}
-                    // ← imagen siempre visible, el contenedor es el que shrinka
+            {selectedProject && (
+                <ProjectModal
+                    project={selectedProject}
+                    onClose={() => setSelectedProject(null)}
                 />
-            ) : (
-                <div className={styles.thumbBg} />
             )}
-            <span className={styles.cat}>{largeProject.category}</span>
-            {/* ← sin transform, sin transition override, sin opacity */}
-            <span className={styles.thumbLabel}>{largeProject.label}</span>
-        </div>
-        <div className={styles.info} style={{ opacity: progress }}>
-            <h4 className={styles.name}>{largeProject.name}</h4>
-            <p className={styles.blurb}>{largeProject.blurb}</p>
-        </div>
-    </div>
-)}
         </section>
     );
 }

@@ -1,0 +1,39 @@
+.techBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    background: rgba(21, 11, 34, 0.634);
+    border: 1px solid rgba(62, 32, 99, 0.5);
+    padding: 6px 10px;
+    color: rgba(245, 242, 236, 0.85);
+    border-radius: 6px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.techBadge:hover {
+    background: rgba(107, 63, 160, 0.15);
+    border-color: rgba(107, 63, 160, 0.4);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 63, 160, 0.15);
+}
+
+.techBadge:hover .iconWrapper {
+    transform: scale(1.15);
+    opacity: 1;
+}
