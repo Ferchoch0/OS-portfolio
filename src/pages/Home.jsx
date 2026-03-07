@@ -4,6 +4,7 @@ import Services from '../sections/Services/Services';
 import Divider from '../components/Divider/Divider';
 import OtterTask from '../sections/OtterTask/OtterTask';
 import ProjectsPreview from '../sections/ProjectsPreview/ProjectsPreview';
+import OtterNews from '../sections/OtterNews/OtterNews';
 import Team from '../sections/Team/Team';
 import Contact from '../sections/Contact/Contact';
 import { marqueeItems } from '../data/marquee';
@@ -17,6 +18,7 @@ export default function Home() {
             <Divider />
             <OtterTask />
             <ProjectsPreview />
+            <OtterNews />
             <Team />
             <Contact />
         </>
