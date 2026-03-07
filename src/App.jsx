@@ -8,8 +8,24 @@ const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
 
 const FallbackLoader = () => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', width: '100vw', background: 'var(--bg)', color: 'var(--text)' }}>
-    <span style={{ fontSize: '1rem', opacity: 0.5 }}>Cargando...</span>
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+    width: '100vw',
+    background: '#0e0d0d',
+  }}>
+    <img
+      src="/loading.png"
+      alt="Cargando..."
+      style={{
+        width: '128px',
+        height: '128px',
+        animation: 'spin 1.2s linear infinite',
+      }}
+    />
+    <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
   </div>
 );
 
