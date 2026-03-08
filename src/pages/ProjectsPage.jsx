@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { getProjectsForCatalog } from '../data/projects';
+                                                                                             
 import TechBadge from '../components/TechBadge/TechBadge';
 import styles from './ProjectsPage.module.css';
 import ProjectModal from '../components/ProjectModal/ProjectModal';

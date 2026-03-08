@@ -1,3 +1,10 @@
+import { HiOutlineCodeBracket } from 'react-icons/hi2';
+import { HiOutlineDevicePhoneMobile } from 'react-icons/hi2';
+import { HiOutlineBuildingOffice2 } from 'react-icons/hi2';
+import { HiOutlineRocketLaunch } from 'react-icons/hi2';
+import { HiOutlineWrenchScrewdriver } from 'react-icons/hi2';
+import { HiOutlineCpuChip } from 'react-icons/hi2';
+
 /**
  * @typedef {Object} Service
  * @property {number} id
@@ -7,6 +14,16 @@
  * @property {string[]} tags
  * @property {boolean} soon
  */
+
+/** Icon mapping per service id */
+export const serviceIcons = {
+  0: HiOutlineCodeBracket,
+  1: HiOutlineDevicePhoneMobile,
+  2: HiOutlineBuildingOffice2,
+  3: HiOutlineRocketLaunch,
+  4: HiOutlineWrenchScrewdriver,
+  5: HiOutlineCpuChip,
+};
 
 /** @type {Service[]} */
 export const services = [

@@ -1,7 +1,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+/* ── Intro Splash Screen ── */
+.heroContainer {
+    position: relative;
+    width: 100%;
+}
+
+.heroContainer.introActive {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.heroIntroWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transform: translateY(-100vh);
+    /* Hero is above viewport initially, splash is in viewport */
+}
+
+.heroIntroWrapper.heroEntering {
+    transform: translateY(0);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.splashScreen {
+    height: 100vh;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    position: relative;
+    z-index: 50;
+}
+
+.splashText {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: splashTextEnter 1s 0.2s forwards;
+    padding: 0 24px;
+    text-align: center;
+}
+
+@keyframes splashTextEnter {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 .hero {
     min-height: 100vh;
+    height: 100vh;
+    /* Fixed height during animation */
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -48,6 +109,10 @@
     filter: drop-shadow(0 0 60px rgba(107, 63, 160, .12));
 }
 
+.initialSplash .otter {
+    animation-delay: 2.1s;
+}
+
 .right {
     display: flex;
     align-items: center;
@@ -78,6 +143,32 @@
     z-index: 2;
 }
 
+.heroSphere::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Start hidden down and left, slightly scaled down */
+    transform: translate(-50%, -50%) translate(-10%, 18%) scale(0.8) rotate(-15deg);
+    width: clamp(280px, 30vw, 400px);
+    height: clamp(280px, 30vw, 400px);
+    background-image: url("/public/otter-hello.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    /* Behind the main hero otter */
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.heroSphere:hover::after {
+    /* Slide out up and to the right, full scale */
+    transform: translate(-50%, -50%) translate(22%, -25%) scale(1) rotate(8deg);
+    opacity: 1;
+}
+
 .otter svg {
     width: 100%;
     height: auto;
@@ -103,6 +194,10 @@
     gap: 14px;
 }
 
+.initialSplash .eyebrow {
+    animation-delay: 1.8s;
+}
+
 .eyebrow::before {
     content: '';
     width: 32px;
@@ -117,6 +212,10 @@
     margin-bottom: 48px;
     opacity: 0;
     animation: fadeUp .8s .45s forwards;
+}
+
+.initialSplash .titleWrap {
+    animation-delay: 1.95s;
 }
 
 /* ── Title (Glitch) ── */
@@ -385,6 +484,10 @@
     animation: fadeUp .7s .6s forwards;
 }
 
+.initialSplash .sub {
+    animation-delay: 2.1s;
+}
+
 /* ── Actions ── */
 .actions {
     display: flex;
@@ -392,6 +495,10 @@
     align-items: center;
     opacity: 0;
     animation: fadeUp .7s .75s forwards;
+}
+
+.initialSplash .actions {
+    animation-delay: 2.25s;
 }
 
 /* ── Stats ── */
@@ -404,6 +511,10 @@
     opacity: 0;
     animation: fadeUp .7s .9s forwards;
     z-index: 2;
+}
+
+.initialSplash .stats {
+    animation-delay: 2.4s;
 }
 
 .stat {

@@ -12,7 +12,7 @@
     font-size: .62rem;
     letter-spacing: .2em;
     text-transform: uppercase;
-    color: var(--blue);
+    color: var(--violet);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -24,7 +24,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--blue);
+    background: var(--violet);
     animation: blink 2s infinite;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .title span {
-    color: var(--blue);
+    color: var(--violet);
 }
 
 .desc {
@@ -73,7 +73,7 @@
 .featureIcon {
     font-family: var(--mono);
     font-size: .6rem;
-    color: var(--blue);
+    color: var(--violet);
     letter-spacing: .1em;
     min-width: 28px;
     padding-top: 4px;

@@ -2,7 +2,7 @@ export const navLinks = [
     { label: 'servicios', to: '/#servicios' },
     { label: 'proyectos', to: '/#proyectos' },
     { label: 'equipo', to: '/#equipo' },
-    { label: 'contacto', to: '/#contacto' },
+    { label: 'contacto', to: '/contact' },
 ];
 
 export const footerLinks = [

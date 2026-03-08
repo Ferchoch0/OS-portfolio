@@ -175,8 +175,33 @@
     align-items: center;
     text-align: center;
     gap: 16px;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease, transform 0.6s ease;
     z-index: 1;
+
+    /* Reveal state */
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.trust-card.visible {
+    opacity: 1;
+    transform: none;
+}
+
+.trust-card:nth-child(1) {
+    transition-delay: 0s, 0.1s, 0.1s;
+}
+
+.trust-card:nth-child(2) {
+    transition-delay: 0s, 0.2s, 0.2s;
+}
+
+.trust-card:nth-child(3) {
+    transition-delay: 0s, 0.3s, 0.3s;
+}
+
+.trust-card:nth-child(4) {
+    transition-delay: 0s, 0.4s, 0.4s;
 }
 
 .trust-card::before {
@@ -329,23 +354,32 @@
     border-radius: 0;
     box-shadow: none;
     cursor: default;
-    animation: tm-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+    /* Reveal settings */
+    opacity: 0;
+    transform: translateY(45px) scale(0.97);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tm-card.visible {
+    opacity: 1;
+    transform: none;
 }
 
 .tm-card:nth-child(1) {
-    animation-delay: 0.05s;
+    transition-delay: 0.05s;
 }
 
 .tm-card:nth-child(2) {
-    animation-delay: 0.2s;
+    transition-delay: 0.2s;
 }
 
 .tm-card:nth-child(3) {
-    animation-delay: 0.35s;
+    transition-delay: 0.35s;
 }
 
 .tm-card:nth-child(4) {
-    animation-delay: 0.5s;
+    transition-delay: 0.5s;
 }
 
 /* ── Imagen: Flota sobre la información ── */

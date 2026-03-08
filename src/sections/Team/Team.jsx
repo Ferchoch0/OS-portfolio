@@ -3,11 +3,11 @@ import { team } from '../../data/team';
 import './Team.css';
 
 /* ── Tarjeta de Miembro (TeamCard): Fusión de Imagen e Información ── */
-function TeamCard({ name, role, desc, image, portfolioUrl, githubUrl, linkedinUrl, mail, accentColor }) {
+function TeamCard({ name, role, desc, image, portfolioUrl, githubUrl, linkedinUrl, mail, accentColor, revealRef }) {
     const accent = accentColor || 'var(--violet)';
 
     return (
-        <div className="tm-card" style={{ '--c-accent': accent }}>
+        <div className={`tm-card reveal`} style={{ '--c-accent': accent }} ref={revealRef}>
             {/* Imagen del miembro: sin contenedor, flota sobre el resto */}
             {image && <img src={image} alt={name} className="tm-card-img" loading="lazy" />}
 
@@ -53,7 +53,7 @@ export default function Team() {
 
     return (
         <section className="team-section" id="equipo">
-            <div className="team-wrapper reveal" ref={revealRef}>
+            <div className="team-wrapper">
 
                 {/* ── SUPERIOR: Título de la Sección ── */}
                 <div className="team-top">
@@ -76,10 +76,10 @@ export default function Team() {
                         </div>
                         <div className="divider-line"></div>
                     </div>
-                    <h3 className="decorated-subtitle">Visión & <span>Valores</span></h3>
+                    <h3 className="decorated-subtitle reveal" ref={revealRef}>Visión & <span>Valores</span></h3>
 
                     <div className="trust-grid">
-                        <div className="trust-card">
+                        <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
                                 <img src="/arquitectura.png" alt="Arquitectura Escalable" className="trust-card-img" />
                             </div>
@@ -88,7 +88,7 @@ export default function Team() {
                                 <p>Diseñamos sistemas robustos preparados para multiplicar tu crecimiento sin comprometer rendimiento ni seguridad.</p>
                             </div>
                         </div>
-                        <div className="trust-card">
+                        <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
                                 <img src="/soporte.png" alt="Soporte 24/7" className="trust-card-img" />
                             </div>
@@ -97,7 +97,7 @@ export default function Team() {
                                 <p>Acompañamiento dedicado y comunicación transparente en cada fase del proyecto.</p>
                             </div>
                         </div>
-                        <div className="trust-card">
+                        <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
                                 <img src="/user.png" alt="Diseño Centrado en el Usuario" className="trust-card-img" />
                             </div>
@@ -106,7 +106,7 @@ export default function Team() {
                                 <p>Interfaces que no solo se ven increíbles, sino que convierten visitantes en clientes reales.</p>
                             </div>
                         </div>
-                        <div className="trust-card">
+                        <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
                                 <img src="/flash.png" alt="Entrega Ágil" className="trust-card-img" />
                             </div>
@@ -127,10 +127,10 @@ export default function Team() {
                         </div>
                         <div className="divider-line"></div>
                     </div>
-                    <h3 className="decorated-subtitle">El Corazón de <span>Otter</span></h3>
+                    <h3 className="decorated-subtitle reveal" ref={revealRef}>El Corazón de <span>Otter</span></h3>
                     <div className="tm-cards-grid">
                         {team.map((member) => (
-                            <TeamCard key={member.id} {...member} />
+                            <TeamCard key={member.id} {...member} revealRef={revealRef} />
                         ))}
                     </div>
                 </div>

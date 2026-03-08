@@ -1,11 +1,13 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Lenis from 'lenis';
 import Layout from './components/Layout/Layout';
 import TVNoise from './components/Background/TvNoise';
 
 const Home = lazy(() => import('./pages/Home'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 const FallbackLoader = () => (
   <div style={{
@@ -30,6 +32,25 @@ const FallbackLoader = () => (
 );
 
 export default function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <TVNoise />
@@ -39,6 +60,7 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="project" element={<ProjectsPage />} />
             <Route path="news" element={<UpdatesPage />} />
+            <Route path="contact" element={<ContactPage />} />
           </Route>
         </Routes>
       </Suspense>

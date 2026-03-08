@@ -105,8 +105,8 @@
     letter-spacing: .12em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--blue);
-    border: 1px solid var(--blue);
+    color: var(--violet);
+    border: 1px solid var(--violet);
     padding: 12px 28px;
     display: inline-flex;
     align-items: center;
@@ -121,7 +121,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--blue);
+    background: var(--violet);
     transform: translateX(-101%);
     transition: transform .3s;
     z-index: -1;

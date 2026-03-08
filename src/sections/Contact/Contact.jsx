@@ -20,18 +20,18 @@ export default function Contact() {
                 <div className={styles.contactInfo}>
                     <div className={styles.contactItem}>
                         <span className={styles.contactItemLabel}>Email</span>
-                        <a href="mailto:hola@ottersolutions.dev" className={styles.contactItemVal}>
-                            hola@ottersolutions.dev
+                        <a href="mailto:otterly.consultas@gmail.com" className={styles.contactItemVal}>
+                            otterly.consultas@gmail.com
                         </a>
                     </div>
                     <div className={styles.contactItem}>
                         <span className={styles.contactItemLabel}>WhatsApp</span>
-                        <a href="#" className={styles.contactItemVal}>+54 9 11 0000-0000</a>
+                        <a href="#" className={styles.contactItemVal}>+54 9 11 53424345</a>
                     </div>
-                    <div className={styles.contactItem}>
+                    {/* <div className={styles.contactItem}>
                         <span className={styles.contactItemLabel}>LinkedIn</span>
                         <a href="#" className={styles.contactItemVal}>OtterSolutions</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

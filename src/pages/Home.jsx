@@ -6,7 +6,7 @@ import OtterTask from '../sections/OtterTask/OtterTask';
 import ProjectsPreview from '../sections/ProjectsPreview/ProjectsPreview';
 import OtterNews from '../sections/OtterNews/OtterNews';
 import Team from '../sections/Team/Team';
-import Contact from '../sections/Contact/Contact';
+import ContactCTA from '../sections/ContactCTA/ContactCTA';
 import { marqueeItems } from '../data/marquee';
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
             <ProjectsPreview />
             <OtterNews />
             <Team />
-            <Contact />
+            <ContactCTA />
         </>
     );
 }

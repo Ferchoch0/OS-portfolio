@@ -36,7 +36,9 @@ export default function Navbar() {
 
     return (
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-            <img src="/logo_blanco.png" alt="" className={styles.logo} />
+            <Link to="/">
+                <img src="/logo_blanco.png" alt="" className={styles.logo} />
+            </Link>
 
             <button
                 className={styles.menuToggle}
@@ -62,13 +64,13 @@ export default function Navbar() {
                 ))}
             </ul>
 
-            <a
-                href="/#contacto"
+            <Link
+                to="/contact"
                 className={styles.cta}
-                onClick={(e) => handleNavClick(e, { to: '/#contacto' })}
+                onClick={() => setMenuOpen(false)}
             >
                 Hablemos
-            </a>
+            </Link>
         </nav>
     );
 }

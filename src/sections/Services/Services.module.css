@@ -1,3 +1,30 @@
+/* ── Pin wrapper: extra height creates scroll room ── */
+.pinWrapper {
+    height: calc(100vh + 2000px);
+    position: relative;
+}
+
+.pinWrapper.pinDone {
+    height: auto;
+}
+
+/* ── Sticky pinned section ── */
+.pinned {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.pinDone .pinned {
+    position: relative;
+    height: auto;
+}
+
 .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -18,13 +45,40 @@
     border: none;
     border-bottom: 1px solid var(--border-light);
     cursor: none;
-    transition: background .25s;
+    transition: background .25s, opacity .6s cubic-bezier(.16, 1, .3, 1), transform .6s cubic-bezier(.16, 1, .3, 1);
     position: relative;
     overflow: hidden;
     background: transparent;
     width: 100%;
     text-align: left;
     font-family: inherit;
+
+    /* Start invisible */
+    opacity: 0;
+    transform: translateX(-30px);
+    pointer-events: none;
+}
+
+.btn.btnVisible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    cursor: none;
+}
+
+.btnIcon {
+    font-size: 1.1rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    min-width: 24px;
+    margin-right: 12px;
+    transition: color .25s;
+}
+
+.btn.active .btnIcon,
+.btn:hover .btnIcon {
+    color: var(--violet);
 }
 
 .btn:last-child {
@@ -95,6 +149,14 @@
     flex-direction: column;
     justify-content: center;
     min-height: 400px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.panel.panelVisible {
+    opacity: 1;
+    transform: none;
 }
 
 .panelContent {
@@ -148,6 +210,15 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
+    .pinWrapper {
+        height: calc(100vh + 2600px);
+    }
+
+    .pinned {
+        justify-content: flex-start;
+        padding-top: 60px;
+    }
+
     .split {
         grid-template-columns: 1fr;
     }
