@@ -1,0 +1,338 @@
+.sidebar {
+    width: 280px;
+    height: auto;
+    position: sticky;
+    top: 110px; /* Aligned with navbar height */
+    padding: 0 40px 60px 40px;
+    display: flex;
+    flex-direction: column;
+    z-index: 5; /* Lower than footer */
+    transition: all 0.5s ease;
+}
+
+/* ── Ambient Backgrounds ── */
+.sidebarAmbient {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.ambientBlob1 {
+    position: absolute;
+    top: 10%;
+    left: -20%;
+    width: 150%;
+    height: 40%;
+    background: radial-gradient(circle, rgba(126, 78, 248, 0.08) 0%, transparent 70%);
+    filter: blur(40px);
+    animation: blobMorph 20s infinite alternate;
+}
+
+.ambientBlob2 {
+    position: absolute;
+    bottom: 10%;
+    right: -20%;
+    width: 120%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(126, 78, 248, 0.05) 0%, transparent 70%);
+    filter: blur(60px);
+    animation: blobMorph 15s infinite alternate-reverse;
+}
+
+@keyframes blobMorph {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 5%) scale(1.1); }
+}
+
+/* ── Header ── */
+.sidebarHeader {
+    margin-bottom: 25px;
+}
+
+.sidebarLabel {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: rgba(245, 242, 236, 0.35);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.sidebarHeaderLine {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(to right, var(--violet2), transparent);
+}
+
+/* ── Filter List ── */
+.filterList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.filterBtn {
+    position: relative;
+    padding: 14px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    outline: none;
+    border-radius: 12px;
+    overflow: hidden; /* For the border light effect */
+}
+
+/* ── Glowing Border Hover Effect ── */
+.filterBtn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--violet2), transparent);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 10px var(--violet2);
+}
+
+.filterBtn:hover::after {
+    width: 100%;
+}
+
+.btnGlass {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+/* ── Filter Button Text Styling ── */
+.btnName {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: rgba(245, 242, 236, 0.5);
+    transition: all 0.4s ease;
+    background: linear-gradient(135deg, var(--violet2), #fff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.filterBtn.active .btnGlass {
+    background: rgba(126, 78, 248, 0.15);
+    border-color: rgba(126, 78, 248, 0.6);
+    box-shadow: 0 0 40px rgba(126, 78, 248, 0.2);
+}
+
+.indicatorWrap .btnDot {
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    from { transform: scale(1); opacity: 0.5; background: var(--violet2); }
+    to { transform: scale(1.5); opacity: 1; background: #fff; }
+}
+
+.btnInner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+}
+
+.btnLeft {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.indicatorWrap {
+    position: relative;
+    width: 6px;
+    height: 6px;
+}
+
+.btnDot {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 242, 236, 0.2);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+
+.filterBtn:hover .btnDot {
+    background: var(--violet2);
+}
+
+.activeRing {
+    position: absolute;
+    inset: -4px;
+    border: 1px solid var(--violet2);
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filterBtn.active .btnDot {
+    background: #fff;
+    box-shadow: 0 0 10px var(--violet2);
+}
+
+.filterBtn.active .activeRing {
+    opacity: 1;
+    transform: scale(1);
+    animation: ringPulse 2s infinite alternate;
+}
+
+@keyframes ringPulse {
+    from { opacity: 0.3; transform: scale(1); }
+    to { opacity: 0.8; transform: scale(1.3); }
+}
+
+.btnName {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: rgba(245, 242, 236, 0.5);
+    transition: all 0.4s ease;
+}
+
+.filterBtn:hover .btnName {
+    color: var(--paper);
+}
+
+.filterBtn.active .btnName {
+    color: #fff;
+    font-weight: 500;
+}
+
+.btnCount {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: rgba(245, 242, 236, 0.25);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 3px 8px;
+    border-radius: 6px;
+    transition: all 0.4s ease;
+}
+
+.filterBtn:hover .btnCount {
+    color: var(--violet2);
+    background: rgba(126, 78, 248, 0.1);
+}
+
+.filterBtn.active .btnCount {
+    color: #fff;
+    background: var(--violet2);
+}
+
+/* ── Glow Effect ── */
+.btnGlow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(126, 78, 248, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.filterBtn:hover .btnGlow {
+    opacity: 1;
+}
+
+/* ── Footer Stats ── */
+.statsFooter {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(126, 78, 248, 0.1);
+}
+
+.totalCountBox {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), transparent);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.countNumberWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.countNumber {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 200;
+    color: var(--paper);
+    line-height: 1;
+    transition: all 0.3s ease;
+}
+
+.countNumber.flash {
+    transform: translateY(-5px);
+    opacity: 0;
+}
+
+.countSuffix {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(245, 242, 236, 0.25);
+}
+
+.countSuffix span {
+    color: var(--violet2);
+    display: block;
+    margin-top: 4px;
+    font-size: 0.45rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        padding: 40px 32px;
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .sidebarHeader, .statsFooter {
+        display: none;
+    }
+
+    .filterList {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .filterBtn {
+        padding: 10px 16px;
+    }
+}
