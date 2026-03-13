@@ -33,12 +33,20 @@ function Chatbot() {
 
     // Popup timer
     useEffect(() => {
+        let hideTimer;
         const timer = setTimeout(() => {
             if (!hasGreeted.current && !isOpen) {
                 setShowPopup(true);
+                // Hide popup after 6 seconds if no interaction
+                hideTimer = setTimeout(() => {
+                    setShowPopup(false);
+                }, 6000);
             }
         }, 6500); // 6.5 seconds delay
-        return () => clearTimeout(timer);
+        return () => {
+            clearTimeout(timer);
+            clearTimeout(hideTimer);
+        };
     }, [isOpen]);
 
     const toggleOpen = useCallback(() => {

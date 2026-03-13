@@ -6,7 +6,6 @@ import TVNoise from './components/Background/TvNoise';
 
 const Home = lazy(() => import('./pages/Home'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
-const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 const FallbackLoader = () => (
@@ -53,13 +52,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <TVNoise />
+      {/*<TVNoise />*/}
       <Suspense fallback={<FallbackLoader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="project" element={<ProjectsPage />} />
-            <Route path="news" element={<UpdatesPage />} />
             <Route path="contact" element={<ContactPage />} />
           </Route>
         </Routes>
