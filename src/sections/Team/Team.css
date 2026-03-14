@@ -561,43 +561,6 @@
     opacity: 1;
 }
 
-/* Botón de Portfolio: estilo delineado */
-.tm-card-btn {
-    font-family: var(--mono, monospace);
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--c-accent);
-    text-decoration: none;
-    padding: 7px 16px;
-    border: 1px solid color-mix(in srgb, var(--c-accent) 40%, transparent);
-    border-radius: 0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.tm-card-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--c-accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
-}
-
-.tm-card-btn:hover {
-    color: #ffffff;
-    border-color: var(--c-accent);
-}
-
-.tm-card-btn:hover::before {
-    transform: scaleX(1);
-}
 
 /* Iconos de Redes Sociales */
 .tm-card-socials {

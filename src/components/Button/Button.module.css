@@ -134,3 +134,175 @@
 .blue:hover::before {
     transform: translateX(0);
 }
+
+/* ── ACTION BASE (Shared by CTA and Team) ── */
+.action {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.action::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--c-accent, var(--violet));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+.action:hover {
+    color: #ffffff;
+    border-color: var(--c-accent, var(--violet));
+}
+
+.action:hover::before {
+    transform: scaleX(1);
+}
+
+.action span {
+    display: flex;
+    align-items: center;
+}
+
+/* ── ACTION SUB-VARIANTS ── */
+.action_cta {
+    font-size: .68rem;
+    letter-spacing: .12em;
+    color: var(--violet);
+    padding: 13px 28px;
+    border: 1px solid color-mix(in srgb, var(--violet) 40%, transparent);
+    gap: 12px;
+}
+
+.action_cta span {
+    gap: 10px;
+}
+
+.action_team {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--c-accent, var(--violet));
+    padding: 7px 16px;
+    border: 1px solid color-mix(in srgb, var(--c-accent, var(--violet)) 40%, transparent);
+}
+
+
+/* ── MODAL BASE ── */
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 13px 22px;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+}
+
+.modal::after {
+    content: " ";
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.modal:hover::after {
+    right: auto;
+    left: 0;
+    width: 100%;
+}
+
+.modal span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal svg {
+    transition: color 0.3s ease-in-out;
+}
+
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.95);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ── MODAL SUB-VARIANTS ── */
+.modal_primary {
+    background: linear-gradient(135deg, #6b3fa0, #8b5cc8);
+    color: #fff;
+    border-color: rgba(139, 92, 200, 0.4);
+    box-shadow: 0 8px 24px rgba(107, 63, 160, 0.3);
+}
+
+.modal_primary::after {
+    background: #e6e6e6;
+}
+
+.modal_primary:hover {
+    border-color: rgba(139, 92, 200, 0.7);
+    box-shadow: 0 14px 32px rgba(107, 63, 160, 0.2);
+}
+
+.modal_primary:hover span,
+.modal_primary:hover svg {
+    color: #6b3fa0;
+}
+
+.modal_ghost {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(245, 242, 236, 0.75);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal_ghost::after {
+    background: rgb(240, 240, 240);
+}
+
+.modal_ghost:hover {
+    border-color: #000000;
+}
+
+.modal_ghost:hover span,
+.modal_ghost:hover svg {
+    color: #000000;
+}

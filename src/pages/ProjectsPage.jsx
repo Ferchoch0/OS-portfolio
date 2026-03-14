@@ -198,12 +198,17 @@ function HeroDivider() {
 function DeviceMockups({ projects }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const phoneSlides = useMemo(() => {
+    const mockupSlides = useMemo(() => {
         const slides = [];
         projects.forEach((p) => {
-            if (p.images && p.images.length > 0) {
-                p.images.forEach((img) => {
-                    slides.push({ src: img, title: p.title, category: p.category });
+            if (p.mockups && p.mockups.length > 0) {
+                p.mockups.forEach((m) => {
+                    slides.push({
+                        desktop: m.desktop,
+                        mobile: m.mobile,
+                        title: p.title,
+                        category: p.category
+                    });
                 });
             }
         });
@@ -211,14 +216,14 @@ function DeviceMockups({ projects }) {
     }, [projects]);
 
     useEffect(() => {
-        if (phoneSlides.length <= 1) return;
+        if (mockupSlides.length <= 1) return;
         const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % phoneSlides.length);
+            setCurrentIndex((prev) => (prev + 1) % mockupSlides.length);
         }, 3500);
         return () => clearInterval(interval);
-    }, [phoneSlides.length]);
+    }, [mockupSlides.length]);
 
-    if (phoneSlides.length === 0) return null;
+    if (mockupSlides.length === 0) return null;
 
     return (
         <div className={styles.devicesWrapper}>
@@ -227,15 +232,33 @@ function DeviceMockups({ projects }) {
                 <div className={styles.monitorInner}>
                     <div className={styles.monitor}>
                         <div className={styles.monitorScreen}>
-                            {phoneSlides.map((slide, i) => (
+                            {mockupSlides.map((slide, i) => (
                                 <img
                                     key={i}
-                                    src={slide.src}
+                                    src={slide.desktop}
                                     alt={slide.title}
                                     className={`${styles.monitorScreenImg} ${currentIndex === i ? styles.monitorScreenImgActive : ''}`}
                                 />
                             ))}
                             <div className={styles.monitorReflection}></div>
+
+                            {/* Project Label moved to Monitor */}
+                            <div className={styles.monitorProjectLabel}>
+                                <span className={styles.monitorLabelDot}></span>
+                                <span className={styles.monitorLabelText}>
+                                    {mockupSlides[currentIndex]?.title}
+                                </span>
+                            </div>
+
+                            {/* Indicators moved to Monitor */}
+                            <div className={styles.monitorDotsRow}>
+                                {mockupSlides.map((_, i) => (
+                                    <div
+                                        key={i}
+                                        className={`${styles.monitorDot} ${currentIndex === i ? styles.monitorDotActive : ''}`}
+                                    />
+                                ))}
+                            </div>
                         </div>
                     </div>
                     <div className={styles.monitorStand}></div>
@@ -254,28 +277,14 @@ function DeviceMockups({ projects }) {
                     <div className={styles.phoneBtnVolUp}></div>
                     <div className={styles.phoneBtnVolDown}></div>
                     <div className={styles.phoneScreen}>
-                        {phoneSlides.map((slide, i) => (
+                        {mockupSlides.map((slide, i) => (
                             <img
                                 key={i}
-                                src={slide.src}
+                                src={slide.mobile}
                                 alt={slide.title}
                                 className={`${styles.phoneScreenImg} ${currentIndex === i ? styles.phoneScreenImgActive : ''}`}
                             />
                         ))}
-                        <div className={styles.phoneProjectLabel}>
-                            <span className={styles.phoneLabelDot}></span>
-                            <span className={styles.phoneLabelText}>
-                                {phoneSlides[currentIndex]?.title}
-                            </span>
-                        </div>
-                        <div className={styles.phoneDotsRow}>
-                            {phoneSlides.map((_, i) => (
-                                <div
-                                    key={i}
-                                    className={`${styles.phoneDot} ${currentIndex === i ? styles.phoneDotActive : ''}`}
-                                />
-                            ))}
-                        </div>
                         <div className={styles.phoneReflection}></div>
                     </div>
                 </div>
@@ -294,7 +303,7 @@ function ProjectCarousel({ project, hasImage }) {
         if (maxImages <= 1 || !hasImage) return;
         const interval = setInterval(() => {
             setCurrentImage((prev) => (prev + 1) % maxImages);
-        }, 3000 + Math.random() * 2000);
+        }, 4000);
         return () => clearInterval(interval);
     }, [maxImages, hasImage]);
 
@@ -410,6 +419,8 @@ export default function ProjectsPage() {
                     onChange={setFilter}
                 />
 
+                <div className={styles.sidebarDivider}></div>
+
                 <div className={styles.gridArea}>
                     <div className={styles.grid}>
                         {filtered.map((project, index) => {
@@ -461,7 +472,7 @@ export default function ProjectsPage() {
                                         </div>
                                         <p className={styles.blurb}>
                                             {project.description && project.description.length > 140
-                                                ? project.description.substring(0, 140) + '...'
+                                                ? project.description.substring(0, 160) + '...'
                                                 : project.description}
                                         </p>
                                         {stackArr.length > 0 && (

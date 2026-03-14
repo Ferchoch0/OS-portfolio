@@ -1,5 +1,6 @@
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import { team } from '../../data/team';
+import Button from '../../components/Button/Button';
 import './Team.css';
 
 /* ── Tarjeta de Miembro (TeamCard): Fusión de Imagen e Información ── */
@@ -19,9 +20,15 @@ function TeamCard({ name, role, desc, image, portfolioUrl, githubUrl, linkedinUr
                     <p className="tm-card-desc">{desc}</p>
                     <div className="tm-card-links">
                         {portfolioUrl && portfolioUrl !== '#' && (
-                            <a href={portfolioUrl} target="_blank" rel="noopener noreferrer" className="tm-card-btn">
+                            <Button
+                                variant="action"
+                                subVariant="team"
+                                href={portfolioUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 Ver Portfolio →
-                            </a>
+                            </Button>
                         )}
                         <div className="tm-card-socials">
                             {githubUrl && githubUrl !== '#' && (

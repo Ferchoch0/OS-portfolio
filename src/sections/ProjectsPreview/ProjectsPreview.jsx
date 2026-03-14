@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import { Link } from 'react-router-dom';
 import styles from './ProjectsPreview.module.css';
@@ -6,6 +6,7 @@ import { useScrollShrink } from '../../components/Image/ShrinkingHeader';
 import { getFeaturedProjects, getTotalProjectCount } from '../../data/projects';
 import TechBadge from '../../components/TechBadge/TechBadge';
 import ProjectModal from '../../components/ProjectModal/ProjectModal';
+import Button from '../../components/Button/Button';
 
 export default function ProjectsPreview() {
     const { sectionRef, targetRef, progress, hasShrunk, rects } = useScrollShrink();
@@ -122,15 +123,15 @@ export default function ProjectsPreview() {
                     </div>
                 </div>
 
-                <Link to="/project" className={styles.ctaBtn}>
-                    <span>Ver catálogo completo</span>
+                <Button variant="action" subVariant="cta" to="/project">
+                    Ver catálogo completo
                     <span className={styles.ctaArrow}>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" strokeLinejoin="miter">
                             <line x1="5" y1="12" x2="19" y2="12" />
                             <polyline points="12 5 19 12 12 19" />
                         </svg>
                     </span>
-                </Link>
+                </Button>
             </div>
 
             {!hasShrunk && largeProject && (

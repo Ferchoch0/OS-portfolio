@@ -1,4 +1,8 @@
 /**
+ * @typedef {Object} Mockup
+ * @property {string} desktop
+ * @property {string} mobile
+ *
  * @typedef {Object} Project
  * @property {string} id
  * @property {string} title
@@ -10,6 +14,7 @@
  * @property {number} order_in_catalog
  * @property {string} [live_url]
  * @property {string[]} images
+ * @property {Mockup[]} [mockups]
  */
 
 /** @type {Project[]} */
@@ -25,7 +30,18 @@ export const projects = [
         order_in_catalog: 1,
         live_url: "",
         images: [
-            "/img/cpa/cpa-1.png"
+            "/img/cpa/cpa-1.png",
+            "/img/cpa/cpa-2.png",
+            "/img/cpa/cpa-3.png",
+            "/img/cpa/cpa-4.png",
+            "/img/cpa/cpa-mobile-1.png",
+            "/img/cpa/cpa-mobile-2.png",
+        ],
+        mockups: [
+            {
+                desktop: "/img/cpa/cpa-1.png",
+                mobile: "/img/cpa/cpa-mobile-1.png"
+            }
         ]
     },
     {
@@ -40,6 +56,12 @@ export const projects = [
         live_url: "",
         images: [
             "/img/mottoso/mottoso-1.png"
+        ],
+        mockups: [
+            {
+                desktop: "/img/mottoso/mottoso-1.png",
+                mobile: "/img/mottoso/mottoso-1.png"
+            }
         ]
     },
     {
@@ -53,7 +75,17 @@ export const projects = [
         order_in_catalog: 3,
         live_url: "https://cpacontrol.com.ar/",
         images: [
-            "/img/cpa-pub/cpa-pub-1.png"
+            "/img/cpa-pub/cpa-pub-1.png",
+            "/img/cpa-pub/cpa-pub-2.png",
+            "/img/cpa-pub/cpa-pub-3.png",
+            "/img/cpa-pub/cpa-pub-4.png",
+            "/img/cpa-pub/cpa-pub-5.png"
+        ],
+        mockups: [
+            {
+                desktop: "/img/cpa-pub/cpa-pub-1.png",
+                mobile: "/img/cpa-pub/cpa-pub-responsive-1.png"
+            }
         ]
     },
     {
@@ -66,7 +98,8 @@ export const projects = [
         order_in_preview: 0,
         order_in_catalog: 4,
         live_url: "",
-        images: []
+        images: [],
+        mockups: []
     },
     {
         id: "5",
@@ -78,7 +111,8 @@ export const projects = [
         order_in_preview: 0,
         order_in_catalog: 5,
         live_url: "",
-        images: []
+        images: [],
+        mockups: []
     },
     {
         id: "6",
@@ -90,7 +124,8 @@ export const projects = [
         order_in_preview: 0,
         order_in_catalog: 6,
         live_url: "",
-        images: []
+        images: [],
+        mockups: []
     }
 ];
 
@@ -104,3 +139,4 @@ export const getProjectsForCatalog = () =>
 
 /** Helper: total count */
 export const getTotalProjectCount = () => projects.length;
+
