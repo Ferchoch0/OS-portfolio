@@ -312,56 +312,10 @@
     gap: 40px;
 }
 
-/* ── CTA Button ── */
-.ctaBtn {
-    font-family: var(--mono);
-    font-size: .68rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    text-decoration: none;
-    color: var(--violet);
-    padding: 13px 28px;
-    border: 1px solid color-mix(in srgb, var(--violet) 40%, transparent);
-    border-radius: 0;
-    transition: all .3s ease;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: none;
-    cursor: pointer;
-}
-
-.ctaBtn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--violet);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
-}
-
-.ctaBtn:hover {
-    color: #ffffff;
-    border-color: var(--violet);
-}
-
-.ctaBtn:hover::before {
-    transform: scaleX(1);
-}
-
+/* ── CTA Arrow (used as child in Button) ── */
 .ctaArrow {
     display: inline-flex;
     transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.ctaBtn:hover .ctaArrow {
-    transform: translateX(5px);
 }
 
 /* ── Counter ── */
