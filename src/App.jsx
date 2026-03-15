@@ -7,6 +7,7 @@ import TVNoise from './components/Background/TvNoise';
 const Home = lazy(() => import('./pages/Home'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
 
 const FallbackLoader = () => (
   <div style={{
@@ -59,6 +60,7 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="project" element={<ProjectsPage />} />
             <Route path="contact" element={<ContactPage />} />
+            <Route path="news" element={<UpdatesPage />} />
           </Route>
         </Routes>
       </Suspense>
