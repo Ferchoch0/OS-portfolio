@@ -53,7 +53,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {/*<TVNoise />*/}
+      <TVNoise />
       <Suspense fallback={<FallbackLoader />}>
         <Routes>
           <Route path="/" element={<Layout />}>
