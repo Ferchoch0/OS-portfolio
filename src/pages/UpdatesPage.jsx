@@ -183,7 +183,8 @@ const updates = [
         date: '08/03/2026',
         title: 'Lanzamiento de Otter.ly',
         desc: 'Lanzamiento oficial de Otter.ly, nuestra plataforma de desarrollo y consultoría.',
-        project
+        project: 'Otter.ly',
+        tags: ['web', 'lanzamiento']
     }
 ];
 

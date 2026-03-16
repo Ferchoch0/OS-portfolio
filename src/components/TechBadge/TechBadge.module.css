@@ -9,10 +9,12 @@
     padding: 6px 10px;
     color: rgba(245, 242, 236, 0.85);
     border-radius: 6px;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: default;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    /* ELIMINAR backdrop-filter — es el culpable principal */
+    /* CAMBIAR transition: solo propiedades GPU-safe */
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    /* transform separado con will-change para promover a layer propio */
+    will-change: transform;
 }
 
 .iconWrapper {
@@ -22,7 +24,7 @@
     width: 14px;
     height: 14px;
     opacity: 0.9;
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease; /* solo transform */
 }
 
 .techBadge:hover {
@@ -30,7 +32,7 @@
     border-color: rgba(107, 63, 160, 0.4);
     color: #ffffff;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(107, 63, 160, 0.15);
+    /* ELIMINAR box-shadow — fuerza repaint en cada frame del hover */
 }
 
 .techBadge:hover .iconWrapper {

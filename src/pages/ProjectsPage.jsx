@@ -5,16 +5,83 @@ import styles from './ProjectsPage.module.css';
 import ProjectModal from '../components/ProjectModal/ProjectModal';
 import FilterBar from '../components/FilterBar/FilterBar';
 
-
-// ── Grid Perspective Background ──
-function GridBackground() {
+// Cambiar la firma del componente
+function GridBackground({ paused }) {
     const canvasRef = useRef(null);
     const animRef = useRef(null);
+    const tRef = useRef(0);           // ← t persiste entre pausas
+    const pausedRef = useRef(paused); // ← paused accesible dentro del loop sin deps
 
+    // Sincronizar el ref cuando cambia la prop
+    useEffect(() => {
+        pausedRef.current = paused;
+        // Si se reanuda, reiniciar el loop
+        if (!paused) {
+            const canvas = canvasRef.current;
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const draw = () => {
+                if (pausedRef.current) return;
+                const W = canvas.width;
+                const H = canvas.height;
+                ctx.clearRect(0, 0, W, H);
+
+                const horizon = H * 0.52;
+                const vx = W / 2;
+                const vy = horizon;
+                const cols = 18;
+                const rows = 14;
+                const spread = W * 2.2;
+                const offset = tRef.current % 1;
+
+                for (let i = 0; i <= cols; i++) {
+                    const fx = ((i / cols) - 0.5) * spread;
+                    const nearX = vx + (fx / spread) * W * 2.5;
+                    const alpha = 0.08 + 0.07 * (1 - Math.abs((i / cols) - 0.5) * 2);
+                    ctx.beginPath();
+                    ctx.moveTo(vx, vy);
+                    ctx.lineTo(nearX, H);
+                    ctx.strokeStyle = `rgba(107,63,160,${alpha})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.stroke();
+                }
+
+                for (let j = 0; j <= rows; j++) {
+                    const p = (j + offset) / rows;
+                    const pf = p * p;
+                    const y = horizon + (H - horizon) * pf;
+                    if (y > H) continue;
+                    const hw = (spread / 2) * pf * 1.4;
+                    const alpha = 0.04 + 0.1 * pf;
+                    ctx.beginPath();
+                    ctx.moveTo(vx - hw, y);
+                    ctx.lineTo(vx + hw, y);
+                    ctx.strokeStyle = `rgba(107,63,160,${alpha})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+
+                const grd = ctx.createRadialGradient(vx, vy, 0, vx, vy, W * 0.4);
+                grd.addColorStop(0, `rgba(107,63,160,${0.04 + 0.02 * Math.sin(tRef.current * Math.PI * 2)})`);
+                grd.addColorStop(1, 'rgba(107,63,160,0)');
+                ctx.fillStyle = grd;
+                ctx.fillRect(0, 0, W, H);
+
+                tRef.current += 0.004;
+                animRef.current = requestAnimationFrame(draw);
+            };
+            cancelAnimationFrame(animRef.current); // cancelar cualquier loop anterior
+            draw();
+        } else {
+            // Pausar: cancelar el loop activo
+            cancelAnimationFrame(animRef.current);
+        }
+    }, [paused]);
+
+    // Solo en el mount: setup inicial del canvas y resize
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const ctx = canvas.getContext('2d');
 
         const resize = () => {
             canvas.width = canvas.offsetWidth;
@@ -22,71 +89,14 @@ function GridBackground() {
         };
         resize();
         window.addEventListener('resize', resize);
-
-        let t = 0;
-        const draw = () => {
-            const W = canvas.width;
-            const H = canvas.height;
-            ctx.clearRect(0, 0, W, H);
-
-            const horizon = H * 0.52;
-            const vx = W / 2;
-            const vy = horizon;
-            const cols = 18;
-            const rows = 14;
-            const spread = W * 2.2;
-            const offset = t % 1;
-
-            // Vertical lines (converging to vanishing point)
-            for (let i = 0; i <= cols; i++) {
-                const fx = ((i / cols) - 0.5) * spread;
-                const nearX = vx + (fx / spread) * W * 2.5;
-                const alpha = 0.08 + 0.07 * (1 - Math.abs((i / cols) - 0.5) * 2);
-                ctx.beginPath();
-                ctx.moveTo(vx, vy);
-                ctx.lineTo(nearX, H);
-                ctx.strokeStyle = `rgba(107,63,160,${alpha})`;
-                ctx.lineWidth = 0.6;
-                ctx.stroke();
-            }
-
-            // Horizontal lines (receding into distance)
-            for (let j = 0; j <= rows; j++) {
-                const p = (j + offset) / rows;
-                const pf = p * p;
-                const y = horizon + (H - horizon) * pf;
-                if (y > H) continue;
-                const hw = (spread / 2) * pf * 1.4;
-                const alpha = 0.04 + 0.1 * pf;
-                ctx.beginPath();
-                ctx.moveTo(vx - hw, y);
-                ctx.lineTo(vx + hw, y);
-                ctx.strokeStyle = `rgba(107,63,160,${alpha})`;
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-            }
-
-            // Subtle center glow pulse
-            const grd = ctx.createRadialGradient(vx, vy, 0, vx, vy, W * 0.4);
-            grd.addColorStop(0, `rgba(107,63,160,${0.04 + 0.02 * Math.sin(t * Math.PI * 2)})`);
-            grd.addColorStop(1, 'rgba(107,63,160,0)');
-            ctx.fillStyle = grd;
-            ctx.fillRect(0, 0, W, H);
-
-            t += 0.004;
-            animRef.current = requestAnimationFrame(draw);
-        };
-
-        draw();
         return () => {
             cancelAnimationFrame(animRef.current);
             window.removeEventListener('resize', resize);
         };
-    }, []);
+    }, []); // ← solo mount/unmount, sin deps de paused
 
     return <canvas ref={canvasRef} className={styles.gridCanvas} />;
 }
-
 
 // ── Scramble Text Hook ──
 function useScramble(finalText, delay = 300) {
@@ -195,7 +205,7 @@ function HeroDivider() {
 
 
 // ── 3D Devices Hero Component ──
-function DeviceMockups({ projects }) {
+function DeviceMockups({ projects, paused }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const mockupSlides = useMemo(() => {
@@ -216,12 +226,12 @@ function DeviceMockups({ projects }) {
     }, [projects]);
 
     useEffect(() => {
-        if (mockupSlides.length <= 1) return;
+        if (mockupSlides.length <= 1 || paused) return; // ← agregar paused
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % mockupSlides.length);
         }, 3500);
         return () => clearInterval(interval);
-    }, [mockupSlides.length]);
+    }, [mockupSlides.length, paused]); // ← agregar paused
 
     if (mockupSlides.length === 0) return null;
 
@@ -295,17 +305,17 @@ function DeviceMockups({ projects }) {
 
 
 // ── Project Carousel Card ──
-function ProjectCarousel({ project, hasImage }) {
+function ProjectCarousel({ project, hasImage, paused }) { // ← agregar paused
     const [currentImage, setCurrentImage] = useState(0);
     const maxImages = project.images?.length || 0;
 
     useEffect(() => {
-        if (maxImages <= 1 || !hasImage) return;
+        if (maxImages <= 1 || !hasImage || paused) return; // ← agregar paused
         const interval = setInterval(() => {
             setCurrentImage((prev) => (prev + 1) % maxImages);
         }, 4000);
         return () => clearInterval(interval);
-    }, [maxImages, hasImage]);
+    }, [maxImages, hasImage, paused]); // ← agregar paused
 
     if (!hasImage) {
         return (
@@ -363,7 +373,7 @@ export default function ProjectsPage() {
             {/* ── Hero Header ── */}
             <div className={styles.hero}>
                 {/* Animated grid background */}
-                <GridBackground />
+                <GridBackground paused={!!selectedProject} />
 
                 <div className={styles.heroInner}>
                     <div className={styles.headerContent}>
@@ -399,7 +409,7 @@ export default function ProjectsPage() {
                     </div>
 
                     {/* ── 3D Devices ── */}
-                    <DeviceMockups projects={allProjects} />
+                    <DeviceMockups projects={allProjects} paused={!!selectedProject} />
                 </div>
 
                 {/* Tech ticker at bottom of hero */}
@@ -436,7 +446,7 @@ export default function ProjectsPage() {
                                 >
                                     {/* Thumbnail */}
                                     <div className={styles.thumb}>
-                                        <ProjectCarousel project={project} hasImage={hasImage} />
+                                        <ProjectCarousel project={project} hasImage={hasImage} paused={!!selectedProject} />
                                         <div className={styles.thumbOverlay}></div>
                                         <div className={styles.badgesWrapper}>
                                             <span className={styles.cat}>

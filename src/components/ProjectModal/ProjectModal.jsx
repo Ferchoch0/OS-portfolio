@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './ProjectModal.module.css';
 import TechBadge from '../TechBadge/TechBadge';
 import Button from '../Button/Button';
 
-export default function ProjectModal({ project, onClose }) {
+const ProjectModal = memo(({ project, onClose }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [lightboxOpen, setLightboxOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
@@ -12,13 +12,47 @@ export default function ProjectModal({ project, onClose }) {
     const [isVertical, setIsVertical] = useState(false);
     const mainImageRef = useRef(null);
 
-    const hasImages = project.images && project.images.length > 0;
-    const images = project.images || [];
+    const hasImages = project?.images && project.images.length > 0;
+    const images = project?.images || [];
 
-    const handleManualChange = (index) => {
+    const handleManualChange = useCallback((index) => {
         setCurrentImageIndex(index);
         setAutoPlayEnabled(false);
-    };
+    }, []);
+
+    const handleNext = useCallback(() => {
+        if (images.length > 1) {
+            setCurrentImageIndex((prev) => (prev + 1) % images.length);
+            setAutoPlayEnabled(false);
+        }
+    }, [images.length]);
+
+    const handlePrev = useCallback(() => {
+        if (images.length > 1) {
+            setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+            setAutoPlayEnabled(false);
+        }
+    }, [images.length]);
+
+    const handleClose = useCallback(() => {
+        setIsClosing(true);
+        setTimeout(() => {
+            onClose();
+        }, 220);
+    }, [onClose]);
+
+    const handleBackdropClick = useCallback((e) => {
+        if (e.target === e.currentTarget) {
+            handleClose();
+        }
+    }, [handleClose]);
+
+    const handleImageLoad = useCallback((e) => {
+        const { naturalWidth, naturalHeight } = e.target;
+        const vertical = naturalHeight > naturalWidth;
+        // Solo actualiza state si realmente cambió la orientación
+        setIsVertical(prev => prev === vertical ? prev : vertical);
+    }, []);
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -33,16 +67,12 @@ export default function ProjectModal({ project, onClose }) {
                 if (lightboxOpen) setLightboxOpen(false);
                 else handleClose();
             }
-            if (e.key === 'ArrowRight' && images.length > 1) {
-                handleManualChange((currentImageIndex + 1) % images.length);
-            }
-            if (e.key === 'ArrowLeft' && images.length > 1) {
-                handleManualChange((currentImageIndex - 1 + images.length) % images.length);
-            }
+            if (e.key === 'ArrowRight') handleNext();
+            if (e.key === 'ArrowLeft') handlePrev();
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [lightboxOpen, images.length, currentImageIndex]);
+    }, [lightboxOpen, handleClose, handleNext, handlePrev]);
 
     // Autoplay logic
     useEffect(() => {
@@ -53,35 +83,21 @@ export default function ProjectModal({ project, onClose }) {
         return () => clearInterval(interval);
     }, [hasImages, images.length, lightboxOpen, autoPlayEnabled]);
 
-    if (!project) return null;
-
-    const handleClose = () => {
-        setIsClosing(true);
-        setTimeout(() => {
-            onClose();
-        }, 400);
-    };
-
-    const handleBackdropClick = (e) => {
-        if (e.target === e.currentTarget) {
-            handleClose();
-        }
-    };
-
-    const handleImageLoad = (e) => {
-        const { naturalWidth, naturalHeight } = e.target;
-        setIsVertical(naturalHeight > naturalWidth);
-    };
-
     // Check orientation immediately if image is already cached
     useEffect(() => {
+        if (!hasImages || images.length <= 1) return;
         if (mainImageRef.current && mainImageRef.current.complete) {
             const { naturalWidth, naturalHeight } = mainImageRef.current;
             if (naturalWidth && naturalHeight) {
-                setIsVertical(naturalHeight > naturalWidth);
+                setIsVertical(prev => {
+                    const next = naturalHeight > naturalWidth;
+                    return prev === next ? prev : next;
+                });
             }
         }
-    }, [currentImageIndex]);
+    }, [currentImageIndex, hasImages, images.length]);
+
+    if (!project) return null;
 
     // Action logic
     const isLive = !!project.live_url;
@@ -118,6 +134,8 @@ export default function ProjectModal({ project, onClose }) {
                                         alt={project.title}
                                         className={styles.mainImage}
                                         onLoad={handleImageLoad}
+                                        loading="eager"
+                                        decoding="async"
                                     />
                                     <div className={styles.expandHint}>
                                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -138,7 +156,7 @@ export default function ProjectModal({ project, onClose }) {
                                                 className={`${styles.thumbnail} ${currentImageIndex === idx ? styles.activeThumbnail : ''}`}
                                                 onClick={() => handleManualChange(idx)}
                                             >
-                                                <img src={src} alt={`Vista ${idx + 1}`} />
+                                                <img src={src} alt={`Vista ${idx + 1}`} loading="lazy" decoding="async" />
                                             </div>
                                         ))}
                                     </div>
@@ -279,6 +297,7 @@ export default function ProjectModal({ project, onClose }) {
                         alt="Vista completa"
                         className={styles.lightboxImg}
                         onClick={(e) => e.stopPropagation()}
+                        decoding="async"
                     />
 
                     {images.length > 1 && (
@@ -303,4 +322,8 @@ export default function ProjectModal({ project, onClose }) {
     );
 
     return createPortal(modalContent, document.body);
-}
+});
+
+ProjectModal.displayName = 'ProjectModal';
+
+export default ProjectModal;

@@ -1,15 +1,25 @@
-/* ── Backdrop / Animations ── */
 .backdrop {
     position: fixed;
     inset: 0;
     z-index: 1000;
-    background: rgba(8, 7, 11, 0.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 32px;
+    will-change: opacity;
+    background: transparent; /* ← esta línea */
+}
+
+.backdrop::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 7, 11, 0.95); /* Un poco más oscuro para ocultar mejor el fondo */
+    backdrop-filter: blur(24px) brightness(0.65) saturate(1.1); /* Blur más fuerte y ajustado para premium feel */
+    -webkit-backdrop-filter: blur(24px) brightness(0.65) saturate(1.1);
+    z-index: -1;
+    transform: translateZ(0); 
+    will-change: transform;
 }
 
 .fadeIn {
@@ -17,7 +27,7 @@
 }
 
 .fadeOut {
-    animation: fadeOut 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: fadeOut 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
 @keyframes fadeIn {
@@ -41,11 +51,10 @@
 }
 
 .slideIn {
-    animation: slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
 .slideOut {
-    animation: slideOut 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: slideOut 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
 @keyframes slideIn {
@@ -80,12 +89,13 @@
     background: linear-gradient(145deg, #100f14 0%, #0c0b10 100%);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 8px;
-    box-shadow:
-        0 50px 100px -20px rgba(0, 0, 0, 0.7),
-        0 30px 60px -15px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    /* REEMPLAZAR las dos box-shadow gigantes por una sola contenida */
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
     overflow: hidden;
     max-height: 90vh;
+    will-change: transform;
+    transform: translateZ(0);
+    isolation: isolate;
 }
 
 /* ── Close Button ── */
@@ -150,9 +160,9 @@
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    background: rgba(10, 9, 15, 0.72);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    /* REEMPLAZAR backdrop-filter por background más opaco */
+    background: rgba(10, 9, 15, 0.9);
+    /* ELIMINAR: backdrop-filter, -webkit-backdrop-filter */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 999px;
     padding: 5px 12px;
@@ -196,9 +206,11 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
     position: relative;
     z-index: 2;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* Vertical Mode Adjustments */
@@ -276,9 +288,9 @@
     cursor: pointer;
     border: 1.5px solid transparent;
     opacity: 0.35;
-    transition: all 0.3s ease;
     background: #08070c;
     flex-shrink: 0;
+    transition: opacity 0.2s ease, border-color 0.2s ease;
 }
 
 .thumbnail img {
@@ -299,7 +311,6 @@
 .activeThumbnail {
     opacity: 1;
     border-color: var(--violet);
-    box-shadow: 0 0 12px rgba(107, 63, 160, 0.25);
 }
 
 /* Fallback */
@@ -337,14 +348,17 @@
     color: #f5f2ec;
     border-left: 1px solid rgba(255, 255, 255, 0.04);
     overflow: hidden;
+    transform: translateZ(0);
+    will-change: auto;
 }
 
 .infoScrollable {
     padding: 40px 40px 32px;
-    overflow-y: auto;
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .infoScrollable::-webkit-scrollbar {
@@ -389,7 +403,7 @@
     height: 5px;
     border-radius: 50%;
     background: var(--violet);
-    box-shadow: 0 0 6px var(--violet);
+    box-shadow: 0 0 4px var(--violet);
 }
 
 .modalTitle {
@@ -448,6 +462,7 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
+    transform: translateZ(0);
 }
 
 /* Status row */
