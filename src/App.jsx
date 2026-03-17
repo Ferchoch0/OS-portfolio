@@ -8,7 +8,6 @@ const Home = lazy(() => import('./pages/Home'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
-const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
 
 const FallbackLoader = () => (
   <div style={{
