@@ -211,13 +211,13 @@
     text-transform: uppercase;
     letter-spacing: 0.14em;
     border-radius: 3px;
-    transition: all 0.3s ease-in-out;
     cursor: pointer;
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     border: 2px solid transparent;
+    /* ELIMINAR: box-shadow, transition: all */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .modal::after {
@@ -244,11 +244,11 @@
     height: 100%;
     position: relative;
     z-index: 2;
-    transition: all 0.3s ease-in-out;
+    transition: color 0.25s ease; /* solo color, no "all" */
 }
 
 .modal svg {
-    transition: color 0.3s ease-in-out;
+    transition: color 0.25s ease;
 }
 
 
@@ -280,7 +280,7 @@
 
 .modal_primary:hover {
     border-color: rgba(139, 92, 200, 0.7);
-    box-shadow: 0 14px 32px rgba(107, 63, 160, 0.2);
+    /* ELIMINAR box-shadow en hover — fuerza repaint */
 }
 
 .modal_primary:hover span,
