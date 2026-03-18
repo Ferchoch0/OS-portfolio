@@ -18,10 +18,24 @@ const Button = ({
     const variantCls = subVariant ? `${styles[variant]} ${styles[`${variant}_${subVariant}`]}` : styles[variant];
     const cls = `${variantCls} ${className}`.trim();
 
-    // Wrap children in span for z-index layering on specific variants
-    const content = (variant === 'primary' || variant === 'ink' || variant === 'cta' || variant === 'outlined' || variant === 'modal' || variant === 'modalPrimary' || variant === 'action')
-        ? <span>{children}</span>
-        : children;
+    // Content logic based on variant
+    let content;
+    if (variant === 'uiverse') {
+        content = (
+            <>
+                <span className={styles.uiverse_text}>{children}</span>
+                <span className={styles.uiverse_glow}></span>
+                <span className={styles.uiverse_border_tl}></span>
+                <span className={styles.uiverse_border_tr}></span>
+                <span className={styles.uiverse_border_bl}></span>
+                <span className={styles.uiverse_border_br}></span>
+            </>
+        );
+    } else if (variant === 'primary' || variant === 'ink' || variant === 'cta' || variant === 'outlined' || variant === 'modal' || variant === 'modalPrimary' || variant === 'action') {
+        content = <span>{children}</span>;
+    } else {
+        content = children;
+    }
 
     if (to) {
         return <Link to={to} className={cls} {...rest}>{content}</Link>;

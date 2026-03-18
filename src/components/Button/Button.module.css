@@ -1,141 +1,4 @@
-/* ── PRIMARY ── */
-.primary {
-    font-family: var(--mono);
-    font-size: .72rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--ink);
-    background: var(--paper);
-    padding: 14px 32px;
-    transition: all .25s;
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-    border: none;
-}
-
-.primary::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--violet);
-    transform: translateX(-101%);
-    transition: transform .3s ease;
-    z-index: 0;
-}
-
-.primary span {
-    position: relative;
-    z-index: 1;
-}
-
-.primary:hover {
-    color: var(--paper);
-}
-
-.primary:hover::after {
-    transform: translateX(0);
-}
-
-/* ── TEXT ── */
-.text {
-    font-family: var(--mono);
-    font-size: .72rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: rgba(245, 242, 236, .38);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(245, 242, 236, .15);
-    padding-bottom: 2px;
-    transition: all .25s;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-}
-
-.text:hover {
-    color: var(--paper);
-    border-bottom-color: var(--paper);
-}
-
-/* ── INK ── */
-.ink {
-    font-family: var(--mono);
-    font-size: .72rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--paper);
-    background: var(--ink);
-    padding: 12px 28px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all .25s;
-    position: relative;
-    overflow: hidden;
-    border: none;
-}
-
-.ink::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--violet);
-    transform: translateX(-101%);
-    transition: transform .3s;
-    z-index: 0;
-}
-
-.ink span {
-    position: relative;
-    z-index: 1;
-}
-
-.ink:hover::before {
-    transform: translateX(0);
-}
-
-/* ── BLUE ── */
-.blue {
-    font-family: var(--mono);
-    font-size: .72rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--violet);
-    border: 1px solid var(--violet);
-    padding: 12px 28px;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    transition: all .25s;
-    position: relative;
-    overflow: hidden;
-    background: none;
-}
-
-.blue::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--violet);
-    transform: translateX(-101%);
-    transition: transform .3s;
-    z-index: -1;
-}
-
-.blue:hover {
-    color: var(--paper);
-}
-
-.blue:hover::before {
-    transform: translateX(0);
-}
-
-/* ── ACTION BASE (Shared by CTA and Team) ── */
+/* ── ACTION BASE (Shared by CTA, Team, Primary, and Hero) ── */
 .action {
     font-family: var(--mono);
     text-transform: uppercase;
@@ -173,6 +36,8 @@
 .action span {
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 /* ── ACTION SUB-VARIANTS ── */
@@ -187,6 +52,67 @@
 
 .action_cta span {
     gap: 10px;
+}
+
+.action_primary {
+    font-size: .72rem;
+    letter-spacing: .12em;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 14px 32px;
+    border: none;
+}
+
+.action_primary::before {
+    z-index: 0;
+    /* Move fill above paper background */
+}
+
+.action_primary span {
+    z-index: 1;
+    /* Stay above fill */
+    gap: 10px;
+}
+
+.action_primary:hover {
+    color: var(--paper);
+}
+
+.action_hero {
+    font-size: .75rem;
+    letter-spacing: .12em;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 16px 36px;
+    transition: all 0.75s;
+}
+
+.action_hero::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0;
+    left: -40px;
+    transform: skewX(45deg);
+    background-color: var(--violet);
+    z-index: 0;
+    transition: all 0.75s;
+    transform-origin: left;
+    /* Ensure it starts from left */
+}
+
+.action_hero span {
+    z-index: 1;
+    gap: 12px;
+}
+
+.action_hero:hover {
+    color: white;
+}
+
+.action_hero:hover::before {
+    width: 160%;
 }
 
 .action_team {
@@ -216,7 +142,6 @@
     position: relative;
     overflow: hidden;
     border: 2px solid transparent;
-    /* ELIMINAR: box-shadow, transition: all */
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -244,7 +169,8 @@
     height: 100%;
     position: relative;
     z-index: 2;
-    transition: color 0.25s ease; /* solo color, no "all" */
+    transition: color 0.25s ease;
+    /* solo color, no "all" */
 }
 
 .modal svg {
@@ -305,4 +231,104 @@
 .modal_ghost:hover span,
 .modal_ghost:hover svg {
     color: #000000;
+}
+
+/* ── UIVERSE VARIANT ── */
+.uiverse {
+    position: relative;
+    cursor: pointer;
+    padding: 16px 32px;
+    text-align: center;
+    font-family: var(--mono);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    background: transparent;
+    border: none;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.uiverse:hover {
+    transform: scale(1.02);
+}
+
+.uiverse_text {
+    position: relative;
+    z-index: 20;
+}
+
+.uiverse_glow {
+    position: absolute;
+    left: -75%;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(12deg);
+    z-index: 10;
+    filter: blur(12px);
+    transition: all 0.8s ease-in-out;
+}
+
+.uiverse:hover .uiverse_glow {
+    left: 125%;
+}
+
+.uiverse_border_tl,
+.uiverse_border_tr,
+.uiverse_border_bl,
+.uiverse_border_br {
+    width: 50%;
+    position: absolute;
+    display: block;
+    border-color: #D4EDF9;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 5px rgba(212, 237, 249, 0.3));
+}
+
+.uiverse_border_tl {
+    height: 20%;
+    border-left: 2px solid;
+    border-top: 2px solid;
+    top: 0;
+    left: 0;
+}
+
+.uiverse_border_tr {
+    height: 60%;
+    border-right: 2px solid;
+    border-top: 2px solid;
+    top: 0;
+    right: 0;
+}
+
+.uiverse:hover .uiverse_border_tr {
+    height: 90%;
+}
+
+.uiverse_border_bl {
+    height: 60%;
+    border-left: 2px solid;
+    border-bottom: 2px solid;
+    bottom: 0;
+    left: 0;
+}
+
+.uiverse:hover .uiverse_border_bl {
+    height: 90%;
+}
+
+.uiverse_border_br {
+    height: 20%;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    bottom: 0;
+    right: 0;
 }

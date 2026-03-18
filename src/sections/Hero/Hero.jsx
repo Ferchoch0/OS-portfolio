@@ -74,8 +74,8 @@ export default function Hero() {
                             Sistemas a medida, aplicaciones y automatizaciones para empresas que necesitan soluciones reales — no templates.
                         </p>
                         <div className={styles.actions}>
-                            <Button variant="primary" to="/contact">Contactanos</Button>
-                            <Button variant="text" href="#proyectos">Ver proyectos</Button>
+                            <Button variant="action" subVariant="hero" to="/contact">Contactanos</Button>
+                            <Button variant="uiverse" href="#proyectos">Ver proyectos</Button>
                         </div>
                     </div>
 

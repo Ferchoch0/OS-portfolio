@@ -28,7 +28,7 @@ export default function OtterTask() {
                 <p className={styles.desc}>
                     Sistema de gestión de stock, ventas y compras construido por el mismo equipo que lo opera. No vendemos lo que no usamos.
                 </p>
-                <Button variant="blue" href="#">
+                <Button variant="action" subVariant="cta" href="#">
                     Conocer OtterTask
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                         <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />

@@ -35,54 +35,6 @@
     flex: 1;
 }
 
-/* ── Eyebrow ── */
-.eyebrow {
-    font-family: var(--mono);
-    font-size: .65rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--violet2);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    opacity: 0;
-    animation: fadeUp .7s .1s forwards;
-}
-
-.eyebrowLine {
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--violet2);
-    position: relative;
-    overflow: hidden;
-}
-
-.eyebrowLine::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.6);
-    animation: eyebrowShimmer 3s infinite;
-}
-
-@keyframes eyebrowShimmer {
-    0% {
-        left: -100%;
-    }
-
-    50% {
-        left: 200%;
-    }
-
-    100% {
-        left: 200%;
-    }
-}
 
 /* ── Title ── */
 .title {

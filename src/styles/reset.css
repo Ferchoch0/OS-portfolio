@@ -10,12 +10,15 @@ html {
     scroll-behavior: smooth;
 }
 
+* {
+    cursor: none !important;
+}
+
 body {
     background: var(--ink);
     color: var(--paper);
     font-family: var(--serif);
     overflow-x: hidden;
-    cursor: none;
 }
 
 /* GRAIN OVERLAY */

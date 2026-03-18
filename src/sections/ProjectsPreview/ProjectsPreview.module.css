@@ -3,53 +3,6 @@
     margin-bottom: 2rem;
 }
 
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: var(--violet);
-    margin-bottom: 24px;
-}
-
-.badgeLine {
-    display: block;
-    width: 75px;
-    height: 1px;
-    background: var(--violet);
-    position: relative;
-    overflow: hidden;
-}
-
-.badgeLine::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: #ffffff;
-    animation: line-slide 3s infinite;
-}
-
-@keyframes line-slide {
-    0% {
-        left: -100%;
-    }
-
-    50% {
-        left: 200%;
-    }
-
-    100% {
-        left: 200%;
-    }
-}
-
 .title {
     font-family: var(--serif, serif);
     font-size: clamp(2.5rem, 5vw, 4rem);

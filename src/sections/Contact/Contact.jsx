@@ -62,7 +62,7 @@ export default function Contact() {
                     <textarea rows="3" placeholder="Contanos brevemente qué necesitás..." />
                 </div>
                 <div className={styles.submitRow}>
-                    <Button variant="primary" href="#">Enviar mensaje</Button>
+                    <Button variant="action" subVariant="primary" href="#">Enviar mensaje</Button>
                     <p className={styles.formNote}>Respondemos en<br />menos de 24 hs.</p>
                 </div>
             </div>

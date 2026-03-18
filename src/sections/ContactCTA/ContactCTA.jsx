@@ -19,7 +19,7 @@ export default function ContactCTA() {
                     Estamos listos para transformar tu idea en una solución digital de alto impacto. Escribinos y agendemos una llamada.
                 </p>
                 <div className={styles.actions}>
-                    <Button variant="primary" to="/contact">Hablemos ahora</Button>
+                    <Button variant="action" subVariant="primary" to="/contact">Hablemos ahora</Button>
                 </div>
             </div>
         </section>

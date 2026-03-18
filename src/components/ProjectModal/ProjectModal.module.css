@@ -7,18 +7,21 @@
     align-items: center;
     padding: 32px;
     will-change: opacity;
-    background: transparent; /* ← esta línea */
+    background: transparent;
+    /* ← esta línea */
 }
 
 .backdrop::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(8, 7, 11, 0.95); /* Un poco más oscuro para ocultar mejor el fondo */
-    backdrop-filter: blur(24px) brightness(0.65) saturate(1.1); /* Blur más fuerte y ajustado para premium feel */
+    background: rgba(8, 7, 11, 0.95);
+    /* Un poco más oscuro para ocultar mejor el fondo */
+    backdrop-filter: blur(24px) brightness(0.65) saturate(1.1);
+    /* Blur más fuerte y ajustado para premium feel */
     -webkit-backdrop-filter: blur(24px) brightness(0.65) saturate(1.1);
     z-index: -1;
-    transform: translateZ(0); 
+    transform: translateZ(0);
     will-change: transform;
 }
 
@@ -53,6 +56,7 @@
 .slideIn {
     animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 .slideOut {
     animation: slideOut 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
