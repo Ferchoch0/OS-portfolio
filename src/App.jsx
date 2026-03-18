@@ -61,6 +61,7 @@ export default function App() {
             <Route path="project" element={<ProjectsPage />} />
             <Route path="news" element={<UpdatesPage />} />
             <Route path="contact" element={<ContactPage />} />
+            <Route path="news" element={<UpdatesPage />} />
           </Route>
         </Routes>
       </Suspense>
