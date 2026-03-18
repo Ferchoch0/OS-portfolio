@@ -4,6 +4,7 @@ import TechBadge from '../components/TechBadge/TechBadge';
 import styles from './ProjectsPage.module.css';
 import ProjectModal from '../components/ProjectModal/ProjectModal';
 import FilterBar from '../components/FilterBar/FilterBar';
+import SectionBadge from '../components/SectionBadge/SectionBadge';
 
 // Cambiar la firma del componente
 function GridBackground({ paused }) {
@@ -377,10 +378,7 @@ export default function ProjectsPage() {
 
                 <div className={styles.heroInner}>
                     <div className={styles.headerContent}>
-                        <p className={styles.eyebrow}>
-                            <span className={styles.eyebrowLine}></span>
-                            Nuestro trabajo
-                        </p>
+                        <SectionBadge text="Nuestro trabajo" />
                         <h1 className={styles.title}>
                             Todos nuestros<br />
                             <em className={styles.scrambleEm}>{scrambledTitle}</em>

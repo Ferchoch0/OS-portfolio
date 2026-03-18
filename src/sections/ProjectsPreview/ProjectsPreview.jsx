@@ -7,6 +7,7 @@ import { getFeaturedProjects, getTotalProjectCount } from '../../data/projects';
 import TechBadge from '../../components/TechBadge/TechBadge';
 import ProjectModal from '../../components/ProjectModal/ProjectModal';
 import Button from '../../components/Button/Button';
+import SectionBadge from '../../components/SectionBadge/SectionBadge';
 
 export default function ProjectsPreview() {
     const { sectionRef, targetRef, progress, hasShrunk, rects } = useScrollShrink();
@@ -46,10 +47,7 @@ export default function ProjectsPreview() {
             style={{ padding: '120px 56px', position: 'relative' }}
         >
             <div className={styles.header} ref={revealRef}>
-                <div className={styles.badge}>
-                    <span className={styles.badgeLine}></span>
-                    NUESTRO TRABAJO
-                </div>
+                <SectionBadge text="NUESTRO TRABAJO" />
                 <h2 className={styles.title}>
                     Proyectos que <span className={styles.titleEm}>hablan</span><br />por nosotros.
                 </h2>
