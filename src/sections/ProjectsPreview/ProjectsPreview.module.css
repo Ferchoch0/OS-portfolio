@@ -325,6 +325,13 @@
 }
 
 @media (max-width: 768px) {
+    .header {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .gallery {
         grid-template-columns: 1fr;
     }
@@ -351,8 +358,6 @@
     }
 
     .counterCard {
-        flex-direction: column;
-        gap: 12px;
         text-align: center;
     }
 

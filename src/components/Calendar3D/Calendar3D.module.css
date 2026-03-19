@@ -281,18 +281,25 @@
 
 @media (max-width: 768px) {
     .calendar {
-        transform: rotateY(-4deg) rotateX(2deg);
-        width: 95%;
-    }
-}
-
-@media (max-width: 600px) {
-    .calendar {
-        transform: none;
-        max-width: 100%;
+        transform: none !important;
         width: 100%;
+        max-width: 100%;
+        animation: none !important;
+        min-height: auto;
     }
     .calendar:hover {
-        transform: translateY(-5px);
+        transform: translateY(-4px) !important;
+    }
+    .day {
+        font-size: 3.5rem;
+    }
+    .title {
+        font-size: 1.4rem;
+    }
+    .cardContent {
+        padding: 24px;
+    }
+    .dateHeader {
+        padding: 20px 24px 16px;
     }
 }

@@ -4,6 +4,7 @@ import { useScrollPinReveal } from '../../hooks/useScrollPinReveal';
 import { useServiceSelector } from '../../hooks/useServiceSelector';
 import { serviceIcons } from '../../data/services';
 import Tag from '../../components/Tag/Tag';
+import SectionBadge from '../../components/SectionBadge/SectionBadge';
 import styles from './Services.module.css';
 
 export default function Services() {
@@ -23,10 +24,12 @@ export default function Services() {
     return (
         <div className={styles.pinWrapper} ref={wrapperRef}>
             <section className={`section-light ${styles.pinned}`} id="servicios">
-                <p className="s-label reveal" ref={revealRef}>Lo que construimos</p>
-                <h2 className="s-title reveal" ref={revealRef}>
-                    Soluciones que <em>escalan</em><br />con tu negocio.
-                </h2>
+                <div className={styles.header} ref={revealRef}>
+                    <SectionBadge text="LO QUE CONSTRUIMOS" />
+                    <h2 className={styles.title}>
+                        Soluciones que <span className={styles.titleEm}>escalan</span><br />con tu negocio.
+                    </h2>
+                </div>
 
                 <div className={styles.split}>
                     {/* Left: service selector */}

@@ -42,7 +42,7 @@
     color: var(--paper);
 }
 
-.cta {
+.desktopCta {
     font-family: var(--mono);
     font-size: .68rem;
     letter-spacing: .12em;
@@ -56,7 +56,7 @@
     overflow: hidden;
 }
 
-.cta::before {
+.desktopCta::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -66,22 +66,52 @@
     z-index: -1;
 }
 
-.cta:hover {
+.desktopCta:hover {
     border-color: var(--violet);
 }
 
-.cta:hover::before {
+.desktopCta:hover::before {
     transform: translateY(0);
 }
 
-/* Mobile menu */
+/* Hamburger toggle */
 .menuToggle {
     display: none;
     background: none;
     border: none;
-    color: var(--paper);
-    font-size: 1.5rem;
-    font-family: var(--mono);
+    cursor: pointer;
+    padding: 8px;
+    z-index: 501;
+    position: relative;
+}
+
+.hamburger {
+    width: 24px;
+    height: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--paper);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.openToggle .hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.openToggle .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.openToggle .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {
@@ -96,26 +126,84 @@
     .menuToggle {
         display: block;
     }
+    
+    .logo {
+        position: relative;
+        z-index: 501;
+    }
 
     .links {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100dvh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 120px 24px 60px;
+        gap: 32px;
+        align-items: center;
+        justify-content: center;
+        z-index: 500;
+        
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        clip-path: circle(0% at top right);
     }
 
     .links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(14, 13, 13, .95);
-        backdrop-filter: blur(16px);
-        padding: 24px;
-        gap: 24px;
-        border-bottom: 1px solid var(--border-dark);
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+        clip-path: circle(150% at top right);
+    }
+    
+    .links li {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition-delay: calc(var(--item-index) * 0.1s + 0.2s);
+    }
+    
+    .links.open li {
+        opacity: 1;
+        transform: translateY(0);
     }
 
-    .cta {
+    .links a {
+        font-size: 1.5rem;
+        letter-spacing: .2em;
+        position: relative;
+    }
+    
+    .mobileCtaWrapper {
+        margin-top: 16px;
+    }
+    
+    .mobileCta {
+        font-family: var(--mono);
+        font-size: 1rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: var(--paper);
+        text-decoration: none;
+        padding: 14px 32px;
+        border: 1px solid rgba(245, 242, 236, .3);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+        transition: all .25s;
+    }
+    
+    .mobileCta:active {
+        background: var(--violet);
+        border-color: var(--violet);
+    }
+
+    .desktopCta {
         display: none;
     }
 }

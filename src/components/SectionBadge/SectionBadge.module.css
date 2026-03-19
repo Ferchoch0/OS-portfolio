@@ -59,3 +59,27 @@
     50% { right: 200%; }
     100% { right: 200%; }
 }
+
+.desktopHidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .badge {
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+    }
+    
+    .desktopHidden {
+        display: block !important;
+    }
+}
+@media (max-width: 375px) {
+    .badge {
+        width: 100%;
+        justify-content: center;
+        gap: 6px;
+    }
+}
+

@@ -303,55 +303,31 @@
    RESPONSIVE
    ═══════════════════════════════════ */
 
-/* Tablet landscape */
-@media (max-width: 1024px) {
-    .hero {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-    }
-
-    .title {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-    }
-
-    .featureStrip {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .featureItem:nth-child(1),
-    .featureItem:nth-child(2) {
-        border-bottom: 1px solid var(--border-dark);
-    }
-
-    .featureItem:nth-child(2) {
-        border-right: none;
-    }
-
-    .featureItem:nth-child(4) {
-        border-right: none;
-    }
-}
-
 /* Tablet portrait & mobile */
 @media (max-width: 768px) {
     .section {
         padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile);
-        gap: 36px;
+        gap: 8px;
     }
 
     .hero {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 12px;
+        text-align: center;
+        
     }
 
     .heroLeft {
-        order: 2;
+        order: 1;
+        padding-right: 0;
+        align-items: center;
     }
 
     .heroRight {
-        order: 1;
+        order: 2;
+        margin-top: 24px;
+        margin-bottom: 32px;
     }
-
     .title {
         font-size: 3rem;
         margin-top: 12px;
@@ -359,18 +335,20 @@
 
     .subtitle {
         margin-bottom: 24px;
+        max-width: 100%;
     }
 
-
-
     .cta {
-        flex-direction: column;
-        align-items: flex-start;
         gap: 12px;
+        align-items: center;
+        justify-content: center;
     }
 
     .featureStrip {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .featureItem {
+        padding: 16px 10px;
     }
 
     .featureItem:nth-child(1),
@@ -378,7 +356,8 @@
         border-bottom: 1px solid var(--border-dark);
     }
 
-    .featureItem:nth-child(2),
+    .featureItem:nth-child(2)
+    .featureItem:nth-child(3),
     .featureItem:nth-child(4) {
         border-right: none;
     }
@@ -386,30 +365,13 @@
 
 /* Small mobile */
 @media (max-width: 480px) {
-    .title {
-        font-size: 2.5rem;
-    }
 
     .featureStrip {
         grid-template-columns: 1fr;
     }
 
-    .featureItem {
-        border-right: none !important;
-    }
-
     .featureItem:not(:last-child) {
         border-right: none;
         border-bottom: 1px solid var(--border-dark);
-    }
-
-    .imageStatsOverlay {
-        flex-direction: column;
-    }
-
-    .overlayStat:not(:last-child) {
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-        width: 100%;
     }
 }

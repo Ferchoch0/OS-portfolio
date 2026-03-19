@@ -270,12 +270,21 @@
 
     .header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         gap: 24px;
+    }
+
+    .headerLeft {
+        align-items: center;
     }
 
     .content {
         grid-template-columns: 1fr;
+    }
+
+    .featuredMeta {
+        gap: 6px;
     }
 
     .featuredInner {

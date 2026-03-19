@@ -85,6 +85,7 @@
     padding: 4px 0 0;
     position: relative;
 }
+
 /* Removed focus-within border-color transition to favor dynamic highlight */
 
 .formRow label {

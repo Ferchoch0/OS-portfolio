@@ -560,6 +560,12 @@
     .trust-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    .tm-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        justify-items: center;
+    }
 }
 
 @media (max-width: 768px) {
@@ -599,7 +605,6 @@
     }
 
     .tm-cards-grid {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
     }
 }
