@@ -117,7 +117,7 @@ function Chatbot() {
                 {/* Header */}
                 <div className={s.header}>
                     <div className={s.avatar}>
-                        <img src="/chatbot.png" alt="Cheko" className={s.avatarImg} />
+                        <img src="/img/icons/chatbot.png" alt="Cheko" className={s.avatarImg} />
                     </div>
                     <div className={s.headerInfo}>
                         <div className={s.headerName}>Cheko</div>
@@ -141,7 +141,7 @@ function Chatbot() {
                                 }`}
                         >
                             {msg.role === 'bot' && (
-                                <img src="/chatbot.png" alt="Cheko Logo" className={s.botMsgAvatar} />
+                                <img src="/img/icons/chatbot.png" alt="Cheko Logo" className={s.botMsgAvatar} />
                             )}
                             <div
                                 className={`${s.bubble} ${msg.role === 'bot' ? s.bubbleBot : s.bubbleUser
@@ -154,7 +154,7 @@ function Chatbot() {
 
                     {isTyping && (
                         <div className={`${s.msgRow} ${s.msgRowBot}`}>
-                            <img src="/chatbot.png" alt="Cheko Logo" className={s.botMsgAvatar} />
+                            <img src="/img/icons/chatbot.png" alt="Cheko Logo" className={s.botMsgAvatar} />
                             <div className={s.typing}>
                                 <span className={s.typingText}>Cheko está escribiendo</span>
                                 <span className={s.dots}>
@@ -198,7 +198,7 @@ function Chatbot() {
                 onClick={toggleOpen}
                 aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat con Cheko'}
             >
-                {isOpen ? '✕' : <img src="/chatbot.png" alt="Chatbot" className={s.fabImg} />}
+                {isOpen ? '✕' : <img src="/img/icons/chatbot.png" alt="Chatbot" className={s.fabImg} />}
             </button>
 
             {/* Popup Message */}

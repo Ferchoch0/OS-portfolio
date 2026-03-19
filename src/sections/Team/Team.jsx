@@ -1,6 +1,7 @@
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import { team } from '../../data/team';
 import Button from '../../components/Button/Button';
+import SectionBadge from '../../components/SectionBadge/SectionBadge';
 import './Team.css';
 
 /* ── Tarjeta de Miembro (TeamCard): Fusión de Imagen e Información ── */
@@ -64,10 +65,7 @@ export default function Team() {
 
                 {/* ── SUPERIOR: Título de la Sección ── */}
                 <div className="team-top">
-                    <span className="team-badge">
-                        <span className="team-badge-dot"></span>
-                        NUESTRA ESENCIA
-                    </span>
+                    <SectionBadge text="Nuestra esencia" centered />
                     <h2 className="team-main-title">
                         Impulsando el futuro <br />
                         <span className="team-main-em">con talento y convicción.</span>
@@ -79,7 +77,7 @@ export default function Team() {
                     <div className="section-divider">
                         <div className="divider-line"></div>
                         <div className="divider-icon divider-img-wrap">
-                            <img src="/vision-valores.png" alt="Visión y Valores" className="divider-img" />
+                            <img src="/img/icons/vision-valores.png" alt="Visión y Valores" className="divider-img" />
                         </div>
                         <div className="divider-line"></div>
                     </div>
@@ -88,7 +86,7 @@ export default function Team() {
                     <div className="trust-grid">
                         <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
-                                <img src="/arquitectura.png" alt="Arquitectura Escalable" className="trust-card-img" />
+                                <img src="/img/icons/arquitectura.png" alt="Arquitectura Escalable" className="trust-card-img" />
                             </div>
                             <div className="trust-card-content">
                                 <h4>Arquitectura Escalable</h4>
@@ -97,7 +95,7 @@ export default function Team() {
                         </div>
                         <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
-                                <img src="/soporte.png" alt="Soporte 24/7" className="trust-card-img" />
+                                <img src="/img/icons/soporte.png" alt="Soporte 24/7" className="trust-card-img" />
                             </div>
                             <div className="trust-card-content">
                                 <h4>Soporte 24/7</h4>
@@ -106,7 +104,7 @@ export default function Team() {
                         </div>
                         <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
-                                <img src="/user.png" alt="Diseño Centrado en el Usuario" className="trust-card-img" />
+                                <img src="/img/icons/user.png" alt="Diseño Centrado en el Usuario" className="trust-card-img" />
                             </div>
                             <div className="trust-card-content">
                                 <h4>Diseño Centrado en el Usuario</h4>
@@ -115,7 +113,7 @@ export default function Team() {
                         </div>
                         <div className="trust-card reveal" ref={revealRef}>
                             <div className="trust-card-icon">
-                                <img src="/flash.png" alt="Entrega Ágil" className="trust-card-img" />
+                                <img src="/img/icons/flash.png" alt="Entrega Ágil" className="trust-card-img" />
                             </div>
                             <div className="trust-card-content">
                                 <h4>Entrega Ágil</h4>
@@ -130,7 +128,7 @@ export default function Team() {
                     <div className="section-divider">
                         <div className="divider-line"></div>
                         <div className="divider-icon divider-img-wrap">
-                            <img src="/team.png" alt="Team" className="divider-img" />
+                            <img src="/img/icons/team.png" alt="Team" className="divider-img" />
                         </div>
                         <div className="divider-line"></div>
                     </div>

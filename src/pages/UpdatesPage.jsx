@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Tag from '../components/Tag/Tag';
-import { updates } from '../data/updates';
+import SectionBadge from '../components/SectionBadge/SectionBadge';
+import Calendar3D from '../components/Calendar3D/Calendar3D';
+import { updates, CATEGORIES, featuredUpdate } from '../data/updates';
 import styles from './UpdatesPage.module.css';
 
 export default function UpdatesPage() {
@@ -27,35 +29,15 @@ export default function UpdatesPage() {
                         Cada mejora, cada feature, cada lanzamiento — documentado. Seguí de cerca lo que estamos construyendo.
                     </p>
                 </div>
+
+                <div className={styles.headerRight}>
+                    {/* The Calendar IS the hero card now */}
+                    <Calendar3D update={featuredUpdate} />
+                </div>
             </header>
 
-            {/* ── Featured Hero ── */}
-            <article className={styles.hero}>
-                <div className={styles.heroAccent} />
-                <div className={styles.heroBody}>
-                    <div className={styles.heroLeft}>
-                        <div className={styles.heroMeta}>
-                            <span className={styles.heroBadge}>★ Destacado</span>
-                            <span className={styles.heroCategory}>{featuredUpdate.category}</span>
-                            <span className={styles.heroDate}>{featuredUpdate.date}</span>
-                        </div>
-                        <h2 className={styles.heroTitle}>{featuredUpdate.title}</h2>
-                        <p className={styles.heroDesc}>{featuredUpdate.desc}</p>
-                        <div className={styles.heroFooter}>
-                            <div className={styles.heroTags}>
-                                {featuredUpdate.tags.map(tag => (
-                                    <Tag key={tag} label={tag} dark />
-                                ))}
-                            </div>
-                            <span className={styles.heroProject}>{featuredUpdate.project}</span>
-                        </div>
-                    </div>
-                    <div className={styles.heroDeco}>
-                        <span className={styles.heroDecoNum}>01</span>
-                        <span className={styles.heroDecoLabel}>Latest</span>
-                    </div>
-                </div>
-            </article>
+            {/* Old Hero removed — integrated into Calendar3D */}
+
 
             {/* ── Filters ── */}
             <div className={styles.filtersRow}>

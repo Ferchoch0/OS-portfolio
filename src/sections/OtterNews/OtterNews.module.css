@@ -1,6 +1,6 @@
 .section {
     background: var(--ink);
-    padding: 120px 56px;
+    padding: var(--section-pad-v) var(--section-pad-h);
 }
 
 /* ── Header ── */
@@ -265,7 +265,7 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .section {
-        padding: 80px 24px;
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile);
     }
 
     .header {

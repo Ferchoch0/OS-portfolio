@@ -37,7 +37,7 @@ export default function Navbar() {
     return (
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
             <Link to="/">
-                <img src="/logo_blanco.png" alt="" className={styles.logo} />
+                <img src="/img/branding/logo_blanco.png" alt="" className={styles.logo} />
             </Link>
 
             <button

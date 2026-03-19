@@ -2,7 +2,7 @@
    SECCIÓN: NUESTRO EQUIPO (TEAM)
    ════════════════════════════════════════════ */
 .team-section {
-    padding: 140px 56px;
+    padding: var(--section-pad-v) var(--section-pad-h);
     background-color: var(--paper, #fafafa);
     background-image:
         radial-gradient(var(--border, rgba(0, 0, 0, 0.03)) 1px, transparent 1px);
@@ -31,42 +31,6 @@
     margin-bottom: 72px;
 }
 
-.team-badge {
-    font-family: var(--mono, monospace);
-    font-size: 0.68rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    padding: 7px 18px;
-    border: 1px solid var(--violet);
-    border-radius: 40px;
-    color: var(--violet);
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 24px;
-}
-
-.team-badge-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--violet);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--violet);
-    animation: dot-glow 2s ease-in-out infinite;
-}
-
-@keyframes dot-glow {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.4;
-    }
-}
 
 .team-main-title {
     font-family: var(--serif, serif);
@@ -600,7 +564,7 @@
 
 @media (max-width: 768px) {
     .team-section {
-        padding: 100px 24px;
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile);
     }
 
     .team-main-title {

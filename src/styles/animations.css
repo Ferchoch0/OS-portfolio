@@ -73,13 +73,19 @@
 .section-light {
     background: var(--paper);
     color: var(--ink);
-    padding: 120px 56px;
+    padding: var(--section-pad-v) var(--section-pad-h);
 }
 
 .section-dark {
     background: var(--ink);
     color: var(--paper);
-    padding: 120px 56px;
+    padding: var(--section-pad-v) var(--section-pad-h);
+}
+
+@media (max-width: 768px) {
+    .section-light, .section-dark {
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile);
+    }
 }
 
 /* ── SECTION LABELS ── */

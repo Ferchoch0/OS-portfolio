@@ -19,7 +19,7 @@ const FallbackLoader = () => (
     background: '#0e0d0d',
   }}>
     <img
-      src="/loading.png"
+      src="/img/illustrations/loading.png"
       alt="Cargando..."
       style={{
         width: '128px',

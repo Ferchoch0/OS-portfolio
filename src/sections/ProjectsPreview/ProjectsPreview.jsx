@@ -44,7 +44,7 @@ export default function ProjectsPreview() {
             className="section-light"
             ref={sectionRef}
             id="proyectos"
-            style={{ padding: '120px 56px', position: 'relative' }}
+            style={{position: 'relative' }}
         >
             <div className={styles.header} ref={revealRef}>
                 <SectionBadge text="NUESTRO TRABAJO" />

@@ -66,7 +66,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    padding: 120px 56px 80px;
+    padding: var(--section-pad-v) var(--section-pad-h) 80px;
     position: relative;
     background: var(--ink);
     overflow: hidden;
@@ -136,7 +136,7 @@
     transform: translate(-50%, -50%);
     width: clamp(375px, 41.25vw, 1050px);
     height: clamp(375px, 41.25vw, 1050px);
-    background-image: url("/public/otter-hero.png");
+    background-image: url("/img/illustrations/otter-hero.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -152,7 +152,7 @@
     transform: translate(-50%, -50%) translate(-10%, 18%) scale(0.8) rotate(-15deg);
     width: clamp(280px, 30vw, 400px);
     height: clamp(280px, 30vw, 400px);
-    background-image: url("/public/otter-hello.png");
+    background-image: url("/img/illustrations/otter-hello.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -546,7 +546,7 @@
 @media (max-width: 1024px) {
     .hero {
         grid-template-columns: 1fr;
-        padding: 120px 24px 80px;
+        padding: var(--section-pad-v) var(--section-pad-h-mobile) 80px;
     }
 
     .otter {

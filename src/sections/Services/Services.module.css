@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0 var(--section-pad-h);
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -216,7 +217,9 @@
 
     .pinned {
         justify-content: flex-start;
-        padding-top: 60px;
+        padding-top: var(--section-pad-v-mobile);
+        padding-left: var(--section-pad-h-mobile);
+        padding-right: var(--section-pad-h-mobile);
     }
 
     .split {
