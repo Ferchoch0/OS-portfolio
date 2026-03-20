@@ -8,7 +8,6 @@
     padding: 32px;
     will-change: opacity;
     background: transparent;
-    /* ← esta línea */
 }
 
 .backdrop::before {
@@ -16,9 +15,8 @@
     position: absolute;
     inset: 0;
     background: rgba(8, 7, 11, 0.95);
-    /* Un poco más oscuro para ocultar mejor el fondo */
     backdrop-filter: blur(24px) brightness(0.65) saturate(1.1);
-    /* Blur más fuerte y ajustado para premium feel */
+    /* Un poco más oscuro para ocultar mejor el fondo */
     -webkit-backdrop-filter: blur(24px) brightness(0.65) saturate(1.1);
     z-index: -1;
     transform: translateZ(0);
@@ -93,10 +91,10 @@
     background: linear-gradient(145deg, #100f14 0%, #0c0b10 100%);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 8px;
-    /* REEMPLAZAR las dos box-shadow gigantes por una sola contenida */
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
     overflow: hidden;
     max-height: 90vh;
+    /* Prevents extremely tall modals on large monitors */
     will-change: transform;
     transform: translateZ(0);
     isolation: isolate;
@@ -164,9 +162,7 @@
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    /* REEMPLAZAR backdrop-filter por background más opaco */
     background: rgba(10, 9, 15, 0.9);
-    /* ELIMINAR: backdrop-filter, -webkit-backdrop-filter */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 999px;
     padding: 5px 12px;
@@ -273,6 +269,44 @@
     text-transform: uppercase;
     letter-spacing: 0.2em;
     opacity: 0.7;
+}
+
+/* Gallery Navigation Arrows */
+.galleryNav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 12;
+    background: rgba(10, 9, 15, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+}
+
+.mainImageWrapper:hover .galleryNav {
+    opacity: 1;
+}
+
+.galleryNav:hover {
+    background: var(--violet);
+    border-color: var(--violet);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.galleryNav.prev {
+    left: 12px;
+}
+
+.galleryNav.next {
+    right: 12px;
 }
 
 /* Thumbnails */
@@ -458,7 +492,7 @@
     margin-bottom: 1rem;
 }
 
-/* ── Actions (rediseño completo) ── */
+/* ── Actions ── */
 .actions {
     margin-top: auto;
     padding-top: 20px;
@@ -589,22 +623,24 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgb(34, 34, 34);
-    color: rgb(255, 255, 255);
-    width: 56px;
-    height: 56px;
-    border-radius: 8px;
+    background: rgba(10, 9, 15, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .lightboxNav:hover {
     background: var(--violet);
-    color: white;
+    border-color: var(--violet);
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -616,77 +652,177 @@
     right: 48px;
 }
 
-
-/* ── Responsive ── */
+/* ── Responsive Layout (Mobile) ── */
 @media (max-width: 900px) {
-    .backdrop {
-        padding: 0;
-        align-items: flex-end;
-    }
-
-    .content {
-        grid-template-columns: 1fr;
-        max-height: 95vh;
-    }
-
-    .galleryColumn {
-        padding: 20px;
-    }
-
-    .infoColumn {
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .infoScrollable {
-        padding: 28px 20px;
-    }
-
-    .modalTitle {
-        font-size: 1.8rem;
+    .closeBtn {
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        background: rgba(10, 9, 15, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
     .modal {
-        border-radius: 20px 20px 0 0;
-        max-height: 95vh;
-        border-bottom: none;
+        max-height: 90vh;
+        width: calc(100% - 32px);
+        margin: 16px;
     }
 
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(100%);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .content {
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: none;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 24px;
+        gap: 20px;
+        -webkit-overflow-scrolling: touch;
     }
 
-    @keyframes slideOut {
-        from {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .content::-webkit-scrollbar {
+        width: 4px;
+    }
 
-        to {
-            opacity: 0;
-            transform: translateY(100%);
-        }
+    .content::-webkit-scrollbar-thumb {
+        background: var(--violet);
+        border-radius: 4px;
+    }
+
+    .galleryColumn,
+    .infoColumn,
+    .infoScrollable {
+        display: contents;
+    }
+
+    .header {
+        order: 1;
+        margin-bottom: 0;
+        padding-right: 32px;
+    }
+
+    .galleryWrapper,
+    .noImage {
+        order: 2;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .mainImageWrapper {
+        cursor: default;
+    }
+
+    .expandHint {
+        display: none !important;
+    }
+
+    .description {
+        order: 3;
+        margin-bottom: 0;
+    }
+
+    .techStack {
+        order: 4;
+        margin-bottom: 0;
+    }
+
+    .actions {
+        order: 5;
+        margin-top: 4px;
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .galleryNav {
+        width: 38px;
+        height: 38px;
+    }
+
+    .lightboxNav {
+        width: 52px;
+        height: 52px;
+    }
+
+    .modalTitle {
+        font-size: 1.4rem;
+        margin-bottom: 0;
+    }
+
+    .thumbnailsContainer {
+        display: none !important;
+    }
+}
+
+/* ── Refining for Very Small Screens (below 480px) ── */
+@media (max-width: 480px) {
+    .header {
+        align-items: center;
+        text-align: center;
+    }
+
+    .modalTitle {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    .description {
+        text-align: center;
+        font-size: 0.8rem;
+    }
+
+    .techStack {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tags {
+        justify-content: center;
+    }
+
+    .sectionLabel::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .statusRow {
+        justify-content: center;
+    }
+
+    .ctaRow {
+        align-items: center;
+    }
+
+    .privateNote {
+        text-align: center;
+    }
+
+    .galleryNav {
+        width: 32px;
+        height: 32px;
+    }
+
+    .galleryNav svg {
+        width: 18px;
+        height: 18px;
     }
 
     .lightboxNav {
         width: 44px;
         height: 44px;
-        border-radius: 10px;
     }
 
+    .lightboxNav svg {
+        width: 24px;
+        height: 24px;
+    }
+    
     .lightboxNav.prev {
-        left: 16px;
+        left: 20px;
     }
-
+    
     .lightboxNav.next {
-        right: 16px;
+        right: 20px;
     }
 }

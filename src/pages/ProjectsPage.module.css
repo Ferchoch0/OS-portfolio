@@ -1143,7 +1143,7 @@
 @media (max-width: 1024px) {
     .pageBody {
         flex-direction: column;
-        padding-top: 40px;
+        padding-top: 0;
         gap: 32px;
     }
 
@@ -1175,12 +1175,13 @@
     }
 
     .stats {
+        margin-top: 15px;
         justify-content: center;
+        gap: 26px;
     }
 
     .devicesWrapper {
-        zoom: 0.8;
-        margin: 0 auto;
+        display: none;
     }
 
     .heroDivider {

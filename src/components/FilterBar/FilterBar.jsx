@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import styles from './FilterBar.module.css';
 
-export default function FilterBar({ categories, active, count, allProjects = [], onChange }) {
+export default function FilterBar({ categories, active, count, allProjects = [], onChange, searchQuery, onSearchChange }) {
     const [displayCount, setDisplayCount] = useState(count);
     const [flash, setFlash] = useState(false);
     const sidebarRef = useRef(null);
@@ -69,6 +69,45 @@ export default function FilterBar({ categories, active, count, allProjects = [],
                 <div className={styles.sidebarHeaderLine} />
             </div>
 
+            <div className={styles.controlsRow}>
+                {/* Mobile Search & Select combo */}
+                <div className={styles.searchWrapper}>
+                    <div className={styles.searchIcon}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Buscar stack, proyecto..."
+                        className={styles.searchInput}
+                        value={searchQuery || ''}
+                        onChange={(e) => onSearchChange(e.target.value)}
+                    />
+                </div>
+
+                <div className={styles.mobileSelectWrapper}>
+                    <select
+                        className={styles.mobileSelect}
+                        value={active}
+                        onChange={(e) => onChange(e.target.value)}
+                    >
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat} ({catCounts[cat] ?? 0})
+                            </option>
+                        ))}
+                    </select>
+                    <div className={styles.selectArrow}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            {/* Desktop Filter List */}
             <nav className={styles.filterList}>
                 {categories.map((cat) => (
                     <button
@@ -102,16 +141,9 @@ export default function FilterBar({ categories, active, count, allProjects = [],
             </nav>
 
             <div className={styles.statsFooter}>
-                <div className={styles.totalCountBox}>
-                    <div className={styles.countNumberWrap}>
-                        <span className={`${styles.countNumber} ${flash ? styles.flash : ''}`}>
-                            {displayCount}
-                        </span>
-                        <div className={styles.countSuffix}>
-                            Proyectos <span>{active}</span>
-                        </div>
-                    </div>
-                </div>
+                <span className={styles.totalStats}>
+                    Total: {allProjects.length} proyectos
+                </span>
             </div>
         </aside>
     );
