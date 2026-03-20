@@ -39,9 +39,7 @@ export default function Contact() {
             <div ref={revealRef} className="reveal">
                 <SectionBadge text="Trabajemos juntos" />
                 <h2 className={styles.title}>
-                    ¿Tenés un<br />
-                    <span>proyecto</span><br />
-                    en mente?
+                    ¿Tenés un <span>proyecto</span> en mente?
                 </h2>
                 <p className={styles.desc}>
                     Contanos qué necesitás. Respondemos en menos de 24 horas con una propuesta o una llamada de 30 minutos.

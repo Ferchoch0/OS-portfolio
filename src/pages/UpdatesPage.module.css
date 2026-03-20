@@ -1,8 +1,7 @@
 .page {
-
     background: var(--ink);
     color: var(--paper);
-    padding: 130px 56px 120px;
+    padding: var(--section-pad-v) var(--section-pad-h);
 }
 
 /* ── Header ── */
@@ -19,7 +18,6 @@
 .headerTop {
     display: flex;
     align-items: center;
-    margin-bottom: 24px;
 }
 
 .counter {
@@ -286,19 +284,23 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .page {
-        padding: 140px 24px 80px;
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile) 80px;
     }
 
     .header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         gap: 24px;
     }
 
     .headerTop {
-        flex-direction: column;
-        align-items: flex-start;
+        justify-content: center;
         gap: 12px;
+    }
+
+    .subtitle {
+        margin: 0 auto;
     }
 
     .headerLeft {

@@ -26,6 +26,10 @@
     opacity: 0.6;
 }
 
+.hero .badgeLine {
+    width: 42px; /* Shorter line for hero as requested */
+}
+
 .lineLeft::after {
     content: '';
     position: absolute;

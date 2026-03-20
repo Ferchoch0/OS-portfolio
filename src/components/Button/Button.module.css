@@ -2,6 +2,7 @@
 .action {
     font-family: var(--mono);
     text-transform: uppercase;
+    font-size: .72rem;
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -11,6 +12,7 @@
     display: inline-flex;
     align-items: center;
     cursor: pointer;
+    padding: 13px 28px;
 }
 
 .action::before {
@@ -42,10 +44,8 @@
 
 /* ── ACTION SUB-VARIANTS ── */
 .action_cta {
-    font-size: .68rem;
     letter-spacing: .12em;
     color: var(--violet);
-    padding: 13px 28px;
     border: 1px solid color-mix(in srgb, var(--violet) 40%, transparent);
     gap: 12px;
 }
@@ -55,11 +55,10 @@
 }
 
 .action_primary {
-    font-size: .72rem;
+    
     letter-spacing: .12em;
     color: var(--ink);
     background: var(--paper);
-    padding: 14px 32px;
     border: none;
 }
 
@@ -331,4 +330,16 @@
     border-bottom: 2px solid;
     bottom: 0;
     right: 0;
+}
+
+@media (max-width: 768px) {
+    .action_hero,
+    .uiverse {
+        padding: 14px 28px;
+        font-size: 0.7rem;
+    }
+    .action {
+        font-size: .68rem;
+        padding: 12px 20px;
+    }
 }

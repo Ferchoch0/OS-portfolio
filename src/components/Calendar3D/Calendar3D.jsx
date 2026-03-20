@@ -22,7 +22,7 @@ export default function Calendar3D({ update }) {
 
                 {/* Spiral binding (Vibrant gradient) */}
                 <div className={styles.spiralStrip}>
-                    {Array.from({ length: 9 }).map((_, i) => (
+                    {Array.from({ length: 7 }).map((_, i) => (
                         <div key={i} className={styles.hole} />
                     ))}
                 </div>

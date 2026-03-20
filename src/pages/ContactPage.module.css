@@ -2,7 +2,7 @@
     min-height: 100vh;
     background: var(--ink);
     color: var(--paper);
-    padding: 160px 56px 120px;
+    padding: var(--section-pad-v) var(--section-pad-h);
 }
 
 .section {
@@ -15,7 +15,7 @@
 .title {
     font-size: clamp(2.8rem, 5vw, 5rem);
     font-weight: 300;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 32px;
 }
 
@@ -24,6 +24,7 @@
     font-style: italic;
     color: var(--violet);
     font-weight: 300;
+    display: block; /* Force line break on desktop for the span */
 }
 
 .desc {
@@ -155,9 +156,60 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
+    .page {
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile);
+    }
+    
     .section {
         grid-template-columns: 1fr;
-        gap: 56px;
-        padding: 80px 24px;
+        gap: 24px;
+        text-align: center; /* Center text content */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title {
+        line-height: 1.2;
+        margin-bottom: 24px;
+    }
+
+    .title span {
+        display: inline; /* No line break on mobile as requested */
+    }
+
+    .desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contactInfo {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px;
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .contactItem {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        min-width: 120px;
+    }
+
+    .contactItemLabel {
+        min-width: 0;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 500px; 
+    }
+
+    .submitRow {
+        justify-content: center;
+        text-align: center;
     }
 }

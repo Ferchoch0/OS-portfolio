@@ -1,3 +1,22 @@
 @import './styles/variables.css';
 @import './styles/reset.css';
 @import './styles/animations.css';
+
+/* ── Scrollbar Artístico ── */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ink);
+    border-left: 1px solid var(--border-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--violet2) 40%, transparent);
+    border: 1px solid rgba(111, 25, 225, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--violet);
+}
