@@ -629,6 +629,15 @@
         flex-wrap: wrap;
         gap: 12px;
     }
+
+    .tm-card-socials {
+        gap: 16px;
+    }
+
+    .tm-card-socials a svg {
+        width: 22px;
+        height: 22px;
+    }
 }
 
 @media (max-width: 480px) {

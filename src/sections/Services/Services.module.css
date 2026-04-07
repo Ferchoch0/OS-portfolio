@@ -117,12 +117,6 @@
     color: var(--violet);
 }
 
-@media (hover: hover) {
-    .btn:hover .btnIcon {
-        color: var(--violet);
-    }
-}
-
 .btn:last-child {
     border-bottom: none;
 }
