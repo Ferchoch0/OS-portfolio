@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Button from '../../components/Button/Button';
 import InteractiveGrid from '../../components/InteractiveGrid/InteractiveGrid';
+import SectionBadge from '../../components/SectionBadge/SectionBadge';
 import styles from './Hero.module.css';
 
 const WORDS = ['solution', 'creative', 'reliable', 'different', 'effective'];
@@ -56,7 +57,7 @@ export default function Hero() {
                 <section className={styles.hero}>
                     <InteractiveGrid />
                     <div className={styles.left}>
-                        <p className={styles.eyebrow}>Desarrollo · Consultoría · Automatización</p>
+                        <SectionBadge text="Desarrollo · Consultoría · Automatización" variant="hero" />
 
                         <div className={styles.titleWrap}>
                             <h1 className={styles.glitch} data-text="Otter.ly">

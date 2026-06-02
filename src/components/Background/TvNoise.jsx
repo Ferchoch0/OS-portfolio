@@ -33,23 +33,35 @@ const TVNoise = () => {
           80% { transform: translate3d(3%, 35%, 0); }
           90% { transform: translate3d(-10%, 10%, 0); }
         }
+        
+        #tv-noise-layer {
+          position: fixed;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          z-index: 99;
+          opacity: 0.15;
+          pointer-events: none;
+          mix-blend-mode: overlay;
+          background-repeat: repeat;
+          animation: tvNoise 0.2s infinite steps(2);
+          will-change: transform;
+          transform: translateZ(0);
+        }
+
+        @media (max-width: 1024px) {
+          #tv-noise-layer {
+            animation-duration: 0.6s; /* Slower animation for mobile */
+            opacity: 0.08;            /* Lower opacity for less GPU load */
+            animation-timing-function: steps(1); /* Even simpler stepping */
+          }
+        }
       `}</style>
       <div
+        id="tv-noise-layer"
         style={{
-          position: "fixed",
-          top: "-50%",
-          left: "-50%",
-          width: "200%",
-          height: "200%",
-          zIndex: 99,
-          opacity: 0.15,
-          pointerEvents: "none",
-          mixBlendMode: "overlay",
           backgroundImage: `url(${noiseUrl})`,
-          backgroundRepeat: "repeat",
-          animation: "tvNoise 0.2s infinite steps(2)",
-          willChange: "transform",
-          transform: "translateZ(0)",
         }}
       />
     </>

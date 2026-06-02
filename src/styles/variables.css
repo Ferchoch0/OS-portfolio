@@ -15,4 +15,10 @@
   --border-light: rgba(14, 13, 13, 0.1);
   --serif: 'Cormorant Garamond', Georgia, serif;
   --mono: 'DM Mono', monospace;
+
+  /* Section Padding */
+  --section-pad-v: 105px;
+  --section-pad-h: 56px;
+  --section-pad-v-mobile: 80px;
+  --section-pad-h-mobile: 24px;
 }

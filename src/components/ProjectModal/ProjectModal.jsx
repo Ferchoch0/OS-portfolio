@@ -119,7 +119,10 @@ const ProjectModal = memo(({ project, onClose }) => {
                     <div className={styles.galleryColumn}>
                         {hasImages ? (
                             <div className={styles.galleryWrapper}>
-                                <div className={`${styles.mainImageWrapper} ${isVertical ? styles.verticalMode : ''}`} onClick={() => setLightboxOpen(true)}>
+                                <div
+                                    className={`${styles.mainImageWrapper} ${isVertical ? styles.verticalMode : ''}`}
+                                    onClick={() => setLightboxOpen(true)}
+                                >
                                     {isVertical && (
                                         <div className={styles.blurredBg} style={{ backgroundImage: `url(${images[currentImageIndex]})` }} />
                                     )}
@@ -128,6 +131,30 @@ const ProjectModal = memo(({ project, onClose }) => {
                                         <span className={styles.counterSeparator}>/</span>
                                         <span className={styles.counterTotal}>{images.length}</span>
                                     </div>
+
+                                    {images.length > 1 && (
+                                        <>
+                                            <button
+                                                className={`${styles.galleryNav} ${styles.prev}`}
+                                                onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                                                aria-label="Anterior"
+                                            >
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className={`${styles.galleryNav} ${styles.next}`}
+                                                onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                                                aria-label="Siguiente"
+                                            >
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                                </svg>
+                                            </button>
+                                        </>
+                                    )}
+
                                     <img
                                         ref={mainImageRef}
                                         src={images[currentImageIndex]}
@@ -305,14 +332,20 @@ const ProjectModal = memo(({ project, onClose }) => {
                             <button
                                 className={`${styles.lightboxNav} ${styles.prev}`}
                                 onClick={(e) => { e.stopPropagation(); handleManualChange((currentImageIndex - 1 + images.length) % images.length); }}
+                                aria-label="Anterior"
                             >
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
                             </button>
                             <button
                                 className={`${styles.lightboxNav} ${styles.next}`}
                                 onClick={(e) => { e.stopPropagation(); handleManualChange((currentImageIndex + 1) % images.length); }}
+                                aria-label="Siguiente"
                             >
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
                             </button>
                         </>
                     )}

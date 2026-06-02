@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import { Link } from 'react-router-dom';
 import styles from './ProjectsPreview.module.css';
@@ -13,16 +13,39 @@ export default function ProjectsPreview() {
     const { sectionRef, targetRef, progress, hasShrunk, rects } = useScrollShrink();
     const revealRef = useScrollReveal();
     const [selectedProject, setSelectedProject] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+    const intervalRef = useRef(null);
 
+    // ✅ Estas van ANTES del useEffect
     const allFeatured = getFeaturedProjects();
     const totalCount = getTotalProjectCount();
     const featuredCount = allFeatured.length;
-
-    const previewProjects = allFeatured.map((p, i) => ({
-        ...p,
-        large: i === 0,
-    }));
+    const previewProjects = allFeatured.map((p, i) => ({ ...p, large: i === 0 }));
     const largeProject = previewProjects.find(p => p.large);
+
+    const startInterval = () => {
+        intervalRef.current = setInterval(() => {
+            setActiveIndex(prev => (prev + 1) % previewProjects.length);
+        }, 3500);
+    };
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        startInterval();
+        return () => {
+            clearInterval(intervalRef.current);
+            window.removeEventListener('resize', checkMobile);
+        };
+    }, []); // ✅ array vacío, previewProjects.length no cambia entre renders
+
+    const goTo = (index) => {
+        clearInterval(intervalRef.current);
+        setActiveIndex(index);
+        startInterval();
+    };
 
     const floatingStyle = {
         position: 'absolute',
@@ -44,7 +67,7 @@ export default function ProjectsPreview() {
             className="section-light"
             ref={sectionRef}
             id="proyectos"
-            style={{ padding: '120px 56px', position: 'relative' }}
+            style={{ position: 'relative' }}
         >
             <div className={styles.header} ref={revealRef}>
                 <SectionBadge text="NUESTRO TRABAJO" />
@@ -53,6 +76,7 @@ export default function ProjectsPreview() {
                 </h2>
             </div>
 
+            {/* Galería desktop — sin cambios */}
             <div className={styles.gallery} ref={revealRef}>
                 {previewProjects.map((project) => {
                     const isLarge = project.large;
@@ -69,32 +93,23 @@ export default function ProjectsPreview() {
                         >
                             <div className={styles.thumb}>
                                 {hasImage ? (
-                                    <img
-                                        src={project.images[0]}
-                                        alt={project.name || project.title}
-                                        className={styles.coverImage}
-                                    />
+                                    <img src={project.images[0]} alt={project.name || project.title} className={styles.coverImage} />
                                 ) : (
                                     <div className={styles.thumbBg} />
                                 )}
                                 <div className={styles.overlay} />
                                 <span className={styles.cat}>{project.category}</span>
                                 <span className={styles.thumbLabel}>{project.label}</span>
-
                                 <div className={styles.hoverContent}>
                                     <h4 className={styles.hoverTitle}>{project.name || project.title}</h4>
                                     <p className={styles.hoverDesc}>
-                                        {project.description
-                                            ? project.description.length > 92
-                                                ? project.description.substring(0, 92) + '...'
-                                                : project.description
+                                        {project.description?.length > 92
+                                            ? project.description.substring(0, 92) + '...'
                                             : project.description}
                                     </p>
-                                    {project.stack && project.stack.length > 0 && (
+                                    {project.stack?.length > 0 && (
                                         <div className={styles.hoverTechs}>
-                                            {project.stack.map((tech) => (
-                                                <TechBadge key={tech} tech={tech} />
-                                            ))}
+                                            {project.stack.map((tech) => <TechBadge key={tech} tech={tech} />)}
                                         </div>
                                     )}
                                 </div>
@@ -102,6 +117,60 @@ export default function ProjectsPreview() {
                         </div>
                     );
                 })}
+            </div>
+
+            {/* Carrusel mobile */}
+            <div className={styles.mobileCarousel} ref={revealRef}>
+                <div
+                    className={styles.carouselTrack}
+                    style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+                >
+                    {previewProjects.map((project) => {
+                        const hasImage = project.images && project.images.length > 0;
+                        return (
+                            <div
+                                key={project.id}
+                                className={styles.carouselSlide}
+                                onClick={() => setSelectedProject(project)}
+                            >
+                                <div className={styles.thumb}>
+                                    {hasImage ? (
+                                        <img src={project.images[0]} alt={project.name || project.title} className={styles.coverImage} />
+                                    ) : (
+                                        <div className={styles.thumbBg} />
+                                    )}
+                                    <div className={styles.overlay} />
+                                    <span className={styles.cat}>{project.category}</span>
+                                    <div className={styles.hoverContent}>
+                                        <h4 className={styles.hoverTitle}>{project.name || project.title}</h4>
+                                        <p className={styles.hoverDesc}>
+                                            {project.description?.length > 92
+                                                ? project.description.substring(0, 92) + '...'
+                                                : project.description}
+                                        </p>
+                                        {project.stack?.length > 0 && (
+                                            <div className={styles.hoverTechs}>
+                                                {project.stack.map((tech) => <TechBadge key={tech} tech={tech} />)}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Puntitos */}
+                <div className={styles.dots}>
+                    {previewProjects.map((_, i) => (
+                        <button
+                            key={i}
+                            className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
+                            onClick={() => goTo(i)}
+                            aria-label={`Proyecto ${i + 1}`}
+                        />
+                    ))}
+                </div>
             </div>
 
             {/* ── CTA ── */}
@@ -132,7 +201,7 @@ export default function ProjectsPreview() {
                 </Button>
             </div>
 
-            {!hasShrunk && largeProject && (
+            {!isMobile && !hasShrunk && largeProject && (
                 <div
                     style={{ ...floatingStyle, cursor: 'pointer' }}
                     className={`${styles.card} ${styles.large}`}

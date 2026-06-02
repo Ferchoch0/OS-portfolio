@@ -13,9 +13,11 @@
     position: sticky;
     top: 0;
     height: 100vh;
+    min-height: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0 var(--section-pad-h);
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -23,6 +25,41 @@
 .pinDone .pinned {
     position: relative;
     height: auto;
+}
+
+/* ── Cabecera de la Sección ── */
+.header {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-family: var(--serif, serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.titleEm {
+    font-style: italic;
+    color: var(--violet);
+    position: relative;
+    display: inline-block;
+}
+
+.titleEm::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: color-mix(in srgb, var(--violet) 20%, transparent);
+    z-index: -1;
 }
 
 .split {
@@ -76,8 +113,7 @@
     transition: color .25s;
 }
 
-.btn.active .btnIcon,
-.btn:hover .btnIcon {
+.btn.active .btnIcon {
     color: var(--violet);
 }
 
@@ -98,14 +134,21 @@
     transform-origin: bottom;
 }
 
-.btn.active,
-.btn:hover {
+.btn.active {
     background: var(--paper2);
 }
 
-.btn.active::before,
-.btn:hover::before {
+.btn.active::before {
     transform: scaleY(1);
+}
+
+@media (hover: hover) {
+    .btn:hover {
+        background: var(--paper2);
+    }
+    .btn:hover::before {
+        transform: scaleY(1);
+    }
 }
 
 .btnNum {
@@ -126,9 +169,14 @@
     transition: color .25s;
 }
 
-.btn.active .btnName,
-.btn:hover .btnName {
+.btn.active .btnName {
     color: var(--violet);
+}
+
+@media (hover: hover) {
+    .btn:hover .btnName {
+        color: var(--violet);
+    }
 }
 
 .btnArrow {
@@ -145,9 +193,9 @@
 /* ── Panel ── */
 .panel {
     padding: 56px 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
     min-height: 400px;
     opacity: 0;
     transform: translateY(20px);
@@ -160,9 +208,19 @@
 }
 
 .panelContent {
+    grid-area: 1 / 1 / 2 / 2;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity .4s ease, transform .4s ease, visibility .4s;
+    pointer-events: none;
+}
+
+.panelContent.activePanel {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
-    transition: opacity .25s, transform .25s;
+    pointer-events: auto;
 }
 
 .panelContent.hiding {
@@ -209,14 +267,28 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .pinWrapper {
-        height: calc(100vh + 2600px);
+        height: auto !important;
     }
 
     .pinned {
+        position: relative;
+        padding-top: 100px;
         justify-content: flex-start;
-        padding-top: 60px;
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .title {
+        font-size: clamp(2rem, 4vw, 3rem);
     }
 
     .split {
@@ -224,20 +296,162 @@
     }
 
     .nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 1fr;
         border-right: none;
         border-bottom: 1px solid var(--border-light);
     }
 
     .btn {
-        padding: 20px 24px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 24px 12px;
+        height: 100%;
+        border-bottom: none;
+        border-right: 1px solid var(--border-light);
+    }
+
+    .btn:nth-child(3n) {
+        border-right: none;
+    }
+
+    .btn:nth-child(-n+3) {
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .btnIcon {
+        margin: 0 0 12px 0;
+        font-size: 1.6rem;
+    }
+
+    .btnName {
+        padding: 0;
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+
+    .btnNum, .btnArrow {
+        display: none;
+    }
+
+    .btn::before {
+        width: 100%;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    .btn.active::before {
+        transform: scaleX(1);
+    }
+
+    @media (hover: hover) {
+        .btn:hover::before {
+            transform: scaleX(1);
+        }
     }
 
     .panel {
         padding: 32px 24px;
         min-height: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+    }
+
+    .panelNum {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .pinned {
+        padding-top: var(--section-pad-v-mobile);
+        padding-left: var(--section-pad-h-mobile);
+        padding-right: var(--section-pad-h-mobile);
+        padding-bottom: 80px; 
     }
 
     .panelNum {
         font-size: 4rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .nav {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 1fr;
+    }
+    .btn:nth-child(n) {
+        border-right: 1px solid var(--border-light);
+        border-bottom: 1px solid var(--border-light);
+    }
+    .btn:nth-child(2n) {
+        border-right: none;
+    }
+    .btn:nth-child(n+5) {
+        border-bottom: none;
+    }
+    .btnName {
+        font-size: 0.9rem;
+    }
+    .btnIcon {
+        font-size: 1.4rem;
+    }
+    .btn {
+        padding: 20px 8px;
+    }
+}
+
+@media (max-height: 850px) and (min-width: 1025px) {
+    .pinned {
+        min-height: 100vh;
+        height: auto;
+        justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 50px;
+        overflow-y: auto;
+    }
+
+    .header {
+        margin-bottom: 1.5rem;
+        gap: 1rem;
+    }
+
+    .title {
+        font-size: 2.8rem;
+    }
+
+    .btn {
+        padding: 16px 24px;
+    }
+
+    .panel {
+        padding: 24px 32px;
+        min-height: 320px;
+    }
+
+    .panelNum {
+        font-size: 5rem;
+        margin-bottom: 8px;
+    }
+
+    .panelName {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+    }
+
+    .panelDesc {
+        margin-bottom: 16px;
+    }
+
+    .tags {
+        margin-bottom: 16px;
     }
 }

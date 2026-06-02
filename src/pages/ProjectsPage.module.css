@@ -2,7 +2,7 @@
    HERO  –  mirrors Home hero style
    ══════════════════════════════════════ */
 .hero {
-    padding: 120px 56px 0;
+    padding: var(--section-pad-v) var(--section-pad-h) 0;
     min-height: 100vh;
     overflow: hidden;
     display: flex;
@@ -728,7 +728,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    padding: 0 56px 60px 0;
+    padding: 0 var(--section-pad-h) var(--section-pad-v) 0;
 }
 
 @media (min-width: 1600px) {
@@ -1143,7 +1143,7 @@
 @media (max-width: 1024px) {
     .pageBody {
         flex-direction: column;
-        padding-top: 40px;
+        padding-top: 0;
         gap: 32px;
     }
 
@@ -1175,12 +1175,13 @@
     }
 
     .stats {
+        margin-top: 15px;
         justify-content: center;
+        gap: 26px;
     }
 
     .devicesWrapper {
-        zoom: 0.8;
-        margin: 0 auto;
+        display: none;
     }
 
     .heroDivider {
@@ -1191,11 +1192,11 @@
 @media (max-width: 768px) {
     .grid {
         grid-template-columns: 1fr;
-        padding: 24px;
+        padding: 0 var(--section-pad-h-mobile) var(--section-pad-v-mobile);
     }
 
     .hero {
-        padding: 120px 24px 0;
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile) 0;
     }
 
     .title {

@@ -37,36 +37,51 @@ export default function Navbar() {
     return (
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
             <Link to="/">
-                <img src="/logo_blanco.png" alt="" className={styles.logo} />
+                <img src="/img/branding/logo_blanco.png" alt="" className={styles.logo} />
             </Link>
 
             <button
-                className={styles.menuToggle}
+                className={`${styles.menuToggle} ${menuOpen ? styles.openToggle : ''}`}
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label="Toggle menu"
             >
-                {menuOpen ? '✕' : '☰'}
+                <div className={styles.hamburger}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </button>
 
             <ul className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
-                {navLinks.map((link) => (
-                    <li key={link.label}>
-                        {link.to.startsWith('/#') ? (
-                            <a href={link.to} onClick={(e) => handleNavClick(e, link)}>
-                                {link.label}
-                            </a>
-                        ) : (
-                            <Link to={link.to} onClick={() => setMenuOpen(false)}>
-                                {link.label}
-                            </Link>
-                        )}
-                    </li>
+                {navLinks
+                    .filter(link => link.to !== '/contact')
+                    .map((link, index) => (
+                        <li key={link.label} style={{ '--item-index': index }}>
+                            {link.to.startsWith('/#') ? (
+                                <a href={link.to} onClick={(e) => handleNavClick(e, link)}>
+                                    {link.label}
+                                </a>
+                            ) : (
+                                <Link to={link.to} onClick={() => setMenuOpen(false)}>
+                                    {link.label}
+                                </Link>
+                            )}
+                        </li>
                 ))}
+                <li className={styles.mobileCtaWrapper} style={{ '--item-index': navLinks.length }}>
+                    <Link
+                        to="/contact"
+                        className={styles.mobileCta}
+                        onClick={() => setMenuOpen(false)}
+                    >
+                        Hablemos
+                    </Link>
+                </li>
             </ul>
 
             <Link
                 to="/contact"
-                className={styles.cta}
+                className={styles.desktopCta}
                 onClick={() => setMenuOpen(false)}
             >
                 Hablemos

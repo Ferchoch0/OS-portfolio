@@ -1,6 +1,6 @@
 .section {
     background: var(--ink);
-    padding: 120px 56px;
+    padding: var(--section-pad-v) var(--section-pad-h);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,25 +16,6 @@
     align-items: center;
 }
 
-.eyebrow {
-    font-family: var(--mono);
-    font-size: .65rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--violet2);
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--violet2);
-    box-shadow: 0 0 8px var(--violet2);
-}
 
 .title {
     font-family: var(--serif);
@@ -68,6 +49,6 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .section {
-        padding: 80px 24px;
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile);
     }
 }

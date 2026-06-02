@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import Button from '../../components/Button/Button';
 import SectionBadge from '../../components/SectionBadge/SectionBadge';
@@ -33,6 +34,24 @@ const newsItems = [
 
 export default function OtterNews() {
     const revealRef = useScrollReveal();
+    const [activeIndex, setActiveIndex] = useState(0);
+    const intervalRef = useRef(null);
+
+    const startInterval = () => {
+        intervalRef.current = setInterval(() => {
+            setActiveIndex(prev => (prev + 1) % newsItems.length);
+        }, 3500);
+    };
+
+    useEffect(() => {
+        startInterval();
+        return () => clearInterval(intervalRef.current);
+    }, []);
+
+    const goTo = (index) => {
+        clearInterval(intervalRef.current);
+        setActiveIndex(index);
+    };
 
     return (
         <section className={styles.section}>
@@ -83,7 +102,7 @@ export default function OtterNews() {
                     </div>
                 </article>
 
-                {/* Secondary items */}
+                {/* Secondary items (Desktop) */}
                 <div className={styles.secondaryList}>
                     {newsItems.map((item, i) => (
                         <article key={i} className={styles.secondaryItem}>
@@ -95,6 +114,38 @@ export default function OtterNews() {
                             <p className={styles.secondaryDesc}>{item.desc}</p>
                         </article>
                     ))}
+                </div>
+
+                {/* Mobile Carousel */}
+                <div className={styles.mobileCarousel}>
+                    <div
+                        className={styles.carouselTrack}
+                        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+                    >
+                        {newsItems.map((item, i) => (
+                            <div key={i} className={styles.carouselSlide}>
+                                <article className={styles.secondaryItem}>
+                                    <div className={styles.secondaryMeta}>
+                                        <span className={styles.category}>{item.category}</span>
+                                        <span className={styles.date}>{item.date}</span>
+                                    </div>
+                                    <h4 className={styles.secondaryTitle}>{item.title}</h4>
+                                    <p className={styles.secondaryDesc}>{item.desc}</p>
+                                </article>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className={styles.dots}>
+                        {newsItems.map((_, i) => (
+                            <button
+                                key={i}
+                                className={`${styles.dot} ${i === activeIndex ? styles.dotActive : ''}`}
+                                onClick={() => goTo(i)}
+                                aria-label={`Noticia ${i + 1}`}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

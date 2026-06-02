@@ -66,7 +66,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    padding: 120px 56px 80px;
+    padding: var(--section-pad-v) var(--section-pad-h) 80px;
     position: relative;
     background: var(--ink);
     overflow: hidden;
@@ -136,7 +136,7 @@
     transform: translate(-50%, -50%);
     width: clamp(375px, 41.25vw, 1050px);
     height: clamp(375px, 41.25vw, 1050px);
-    background-image: url("/public/otter-hero.png");
+    background-image: url("/img/illustrations/otter-hero.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -152,7 +152,7 @@
     transform: translate(-50%, -50%) translate(-10%, 18%) scale(0.8) rotate(-15deg);
     width: clamp(280px, 30vw, 400px);
     height: clamp(280px, 30vw, 400px);
-    background-image: url("/public/otter-hello.png");
+    background-image: url("/img/illustrations/otter-hello.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -493,6 +493,7 @@
     display: flex;
     gap: 24px;
     align-items: center;
+    flex-wrap: wrap;
     opacity: 0;
     animation: fadeUp .7s .75s forwards;
 }
@@ -543,18 +544,64 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .hero {
         grid-template-columns: 1fr;
-        padding: 120px 24px 80px;
+        height: auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    .otter {
-        position: relative;
-        right: 0;
-        width: 80vw;
-        max-width: 400px;
-        margin: 40px auto 0;
+    .hero {
+        padding: var(--section-pad-v-mobile) var(--section-pad-h-mobile);
+    }
+
+    /* Hide background grid on mobile */
+    .hero canvas {
+        display: none !important;
+    }
+
+    .left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .heroSphere {
+        display: none;
+    }
+
+    .eyebrow {
+        justify-content: center;
+    }
+
+    .titleWrap {
+        align-items: center;
+    }
+
+    .rotatingWord {
+        align-self: center;
+    }
+
+    .sub {
+        margin-bottom: 32px;
+    }
+
+    .actions {
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .right {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .stats {
@@ -562,17 +609,13 @@
         bottom: auto;
         right: auto;
         margin-top: 48px;
+        display: flex;
+        gap: 24px;
         justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .glitch {
-        font-size: clamp(2.8rem, 14vw, 4.5rem);
+        width: 100%;
     }
 
-    .actions {
-        flex-direction: column;
-        align-items: flex-start;
+    .stat {
+        text-align: center;
     }
 }

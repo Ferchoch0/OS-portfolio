@@ -137,10 +137,8 @@ function useScramble(finalText, delay = 300) {
 // ── Tech Ticker ──
 function TechTicker() {
     const techs = [
-        'React', 'Next.js', 'Node.js', 'TypeScript', 'PostgreSQL',
-        'Tailwind', 'AWS', 'Docker', 'Prisma', 'Stripe',
-        'Redis', 'Supabase', 'Vercel', 'GraphQL', 'Python',
-        'Figma', 'MongoDB', 'Firebase', 'tRPC', 'Zod',
+        'React', 'HTML', 'CSS', 'JavaScript','React Native', 'Node.js', 'TypeScript', 'PostgreSQL',
+        'Tailwind', 'Python', 'PHP', 'Figma', 'Vite', 'n8n'
     ];
     const doubled = [...techs, ...techs];
 
@@ -355,6 +353,7 @@ function ProjectCarousel({ project, hasImage, paused }) { // ← agregar paused
 // ── Main Page ──
 export default function ProjectsPage() {
     const [filter, setFilter] = useState('Todos');
+    const [searchQuery, setSearchQuery] = useState('');
     const [selectedProject, setSelectedProject] = useState(null);
     const allProjects = getProjectsForCatalog();
 
@@ -365,9 +364,19 @@ export default function ProjectsPage() {
     }, [allProjects]);
 
     const filtered = useMemo(() => {
-        if (filter === 'Todos') return allProjects;
-        return allProjects.filter((p) => p.category === filter);
-    }, [filter, allProjects]);
+        let result = allProjects;
+        if (filter !== 'Todos') {
+            result = result.filter((p) => p.category === filter);
+        }
+        if (searchQuery.trim()) {
+            const lowerQ = searchQuery.toLowerCase();
+            result = result.filter(p => 
+                p.title?.toLowerCase().includes(lowerQ) || 
+                (p.stack && p.stack.some(s => s.toLowerCase().includes(lowerQ)))
+            );
+        }
+        return result;
+    }, [filter, searchQuery, allProjects]);
 
     return (
         <div className={styles.page}>
@@ -425,6 +434,8 @@ export default function ProjectsPage() {
                     count={filtered.length}
                     allProjects={allProjects}
                     onChange={setFilter}
+                    searchQuery={searchQuery}
+                    onSearchChange={setSearchQuery}
                 />
 
                 <div className={styles.sidebarDivider}></div>

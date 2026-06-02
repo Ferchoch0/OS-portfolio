@@ -11,16 +11,26 @@
     margin-bottom: 24px;
 }
 
+.centered {
+    width: 100%;
+    justify-content: center;
+}
+
 .badgeLine {
     display: block;
-    width: 75px;
+    width: 65px;
     height: 1px;
     background: var(--violet);
     position: relative;
     overflow: hidden;
+    opacity: 0.6;
 }
 
-.badgeLine::after {
+.hero .badgeLine {
+    width: 42px; /* Shorter line for hero as requested */
+}
+
+.lineLeft::after {
     content: '';
     position: absolute;
     top: 0;
@@ -28,19 +38,52 @@
     width: 50%;
     height: 100%;
     background: #ffffff;
-    animation: line-slide 3s infinite;
+    animation: line-slide-right 3s infinite;
 }
 
-@keyframes line-slide {
-    0% {
-        left: -100%;
-    }
+.lineRight::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 50%;
+    height: 100%;
+    background: #ffffff;
+    animation: line-slide-left 3s infinite;
+}
 
-    50% {
-        left: 200%;
-    }
+@keyframes line-slide-right {
+    0% { left: -100%; }
+    50% { left: 200%; }
+    100% { left: 200%; }
+}
 
-    100% {
-        left: 200%;
+@keyframes line-slide-left {
+    0% { right: -100%; }
+    50% { right: 200%; }
+    100% { right: 200%; }
+}
+
+.desktopHidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .badge {
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+    }
+    
+    .desktopHidden {
+        display: block !important;
     }
 }
+@media (max-width: 375px) {
+    .badge {
+        width: 100%;
+        justify-content: center;
+        gap: 6px;
+    }
+}
+

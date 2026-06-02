@@ -1,5 +1,6 @@
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import Button from '../../components/Button/Button';
+import SectionBadge from '../../components/SectionBadge/SectionBadge';
 import styles from './ContactCTA.module.css';
 
 export default function ContactCTA() {
@@ -8,10 +9,7 @@ export default function ContactCTA() {
     return (
         <section className={styles.section}>
             <div className={`reveal ${styles.content}`} ref={revealRef}>
-                <p className={styles.eyebrow}>
-                    <span className={styles.dot}></span>
-                    Trabajemos juntos
-                </p>
+                <SectionBadge text="Trabajemos juntos" centered />
                 <h2 className={styles.title}>
                     ¿Tenés un <em>proyecto</em> en mente?
                 </h2>
