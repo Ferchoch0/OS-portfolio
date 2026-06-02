@@ -25,9 +25,7 @@ export default function Footer() {
 
     return (
         <footer className={styles.footer}>
-            <span className={styles.logo}>
-                otter<span>_</span>solutions
-            </span>
+            <span className={styles.logo}>otter.ly</span>
             <div className={styles.links}>
                 {footerLinks.map((link) => (
                     link.href ? (
@@ -45,7 +43,7 @@ export default function Footer() {
                     )
                 ))}
             </div>
-            <span className={styles.copy}>© 2025 OtterSolutions</span>
+            <span className={styles.copy}>© 2025 otter.ly</span>
         </footer>
     );
 }

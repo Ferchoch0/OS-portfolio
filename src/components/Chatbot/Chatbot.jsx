@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback, memo } from 'react';
 import s from './Chatbot.module.css';
 
 const ENDPOINT =
-    'https://alison-unresistant-flourishingly.ngrok-free.dev/n8n/webhook/92243dd1-cab0-4406-b301-26c9442a7d08/chat';
+    'https://otterlyinternal.qzz.io/n8n/webhook/92243dd1-cab0-4406-b301-26c9442a7d08/chat';
 
 const WELCOME_MSG = {
     role: 'bot',

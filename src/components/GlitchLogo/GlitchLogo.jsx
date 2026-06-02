@@ -4,7 +4,7 @@ import styles from './GlitchLogo.module.css';
 /**
  * @param {{ word: string, glitchWord: string, to?: string }} props
  */
-export default function GlitchLogo({ word = 'ottersolutions', glitchWord = 'othersolutions', to = '/' }) {
+export default function GlitchLogo({ word = 'otter.ly', glitchWord = 'othersolutions', to = '/' }) {
     return (
         <Link to={to} className={styles.logo}>
             <span className={styles.base}>{word}</span>
