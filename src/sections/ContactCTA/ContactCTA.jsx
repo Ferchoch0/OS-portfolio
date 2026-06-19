@@ -9,12 +9,12 @@ export default function ContactCTA() {
     return (
         <section className={styles.section}>
             <div className={`reveal ${styles.content}`} ref={revealRef}>
-                <SectionBadge text="Trabajemos juntos" centered />
+                <SectionBadge text="Empezá tu proyecto hoy" centered />
                 <h2 className={styles.title}>
                     ¿Tenés un <em>proyecto</em> en mente?
                 </h2>
                 <p className={styles.desc}>
-                    Estamos listos para transformar tu idea en una solución digital de alto impacto. Escribinos y agendemos una llamada.
+                    Nuestro equipo de desarrollo está listo para crear tu solución digital de alto impacto. Escribinos y agendemos una llamada.
                 </p>
                 <div className={styles.actions}>
                     <Button variant="action" subVariant="primary" to="/contact">Hablemos ahora</Button>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
 import { useScrollPinReveal } from '../../hooks/useScrollPinReveal';
 import { useServiceSelector } from '../../hooks/useServiceSelector';
@@ -35,7 +35,7 @@ export default function Services() {
                 <div className={styles.header} ref={revealRef}>
                     <SectionBadge text="LO QUE CONSTRUIMOS" />
                     <h2 className={styles.title}>
-                        Soluciones que <span className={styles.titleEm}>escalan</span><br />con tu negocio.
+                        Soluciones digitales que <span className={styles.titleEm}>escalan</span><br />con tu negocio.
                     </h2>
                 </div>
 
@@ -63,6 +63,27 @@ export default function Services() {
                                 </button>
                             );
                         })}
+
+                        {/* Scroll indicator arrow — only on desktop, hides when 3 items are revealed */}
+                        {!isMobile && visibleCount < 3 && (
+                            <div className={styles.floatingScrollHint} aria-hidden="true">
+                                <svg
+                                    className={styles.mouseIcon}
+                                    width="20"
+                                    height="30"
+                                    viewBox="0 0 24 36"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <rect x="2" y="2" width="20" height="32" rx="10" />
+                                    <path d="M12 8v6" className={styles.mouseWheel} />
+                                </svg>
+                                <span className={styles.scrollHintText}>Scroll</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* Right: detail panel */}

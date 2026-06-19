@@ -72,7 +72,7 @@ export default function Hero() {
                         </div>
 
                         <p className={styles.sub}>
-                            Sistemas a medida, aplicaciones y automatizaciones para empresas que necesitan soluciones reales — no templates.
+                            Desarrollo de software a medida, aplicaciones móviles y automatización inteligente para empresas que buscan soluciones digitales escalables — sin templates, sin atajos.
                         </p>
                         <div className={styles.actions}>
                             <Button variant="action" subVariant="hero" to="/contact">Contactanos</Button>
@@ -86,12 +86,9 @@ export default function Hero() {
                         <div className={styles.stats}>
                             <div className={styles.stat}>
                                 <span className={styles.statNum}>12<sup>+</sup></span>
-                                <span className={styles.statLabel}>Proyectos</span>
+                                <span className={styles.statLabel}>Proyectos finalizados</span>
                             </div>
-                            <div className={styles.stat}>
-                                <span className={styles.statNum}>3</span>
-                                <span className={styles.statLabel}>Developers</span>
-                            </div>
+
                             <div className={styles.stat}>
                                 <span className={styles.statNum}>1</span>
                                 <span className={styles.statLabel}>Producto propio</span>

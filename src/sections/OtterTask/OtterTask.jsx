@@ -47,7 +47,7 @@ export default function OtterTask() {
                             Otter<span>Task</span>
                         </h2>
                         <p className={styles.subtitle}>
-                            Eliminamos el desorden administrativo con un sistema que escala junto a tu negocio, desde la primera venta hasta la gestión multi-sucursal.
+                            Sistema de gestión empresarial todo-en-uno. Eliminamos el desorden administrativo con software que escala junto a tu negocio, desde la primera venta hasta la gestión multi-sucursal.
                         </p>
 
 
@@ -60,7 +60,7 @@ export default function OtterTask() {
                                     <path d="M1 6h10M6 1l5 5-5 5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
                                 </svg>
                             </Button>
-                            <span className={styles.ctaHint}>¿Querés saber mas de <br />nuestro sistema?</span>
+                            <span className={styles.ctaHint}>¿Querés optimizar la gestión <br />de tu negocio?</span>
                         </div>
                     </div>
 

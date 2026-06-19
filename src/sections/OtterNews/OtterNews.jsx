@@ -63,7 +63,7 @@ export default function OtterNews() {
                             Noticias <span>&</span> Updates
                         </h2>
                         <p className={styles.desc}>
-                            Entérate de las últimas noticias del mundo otter.ly. Descubre nuevos proyectos, actualizaciones y todo lo que estamos construyendo.
+                            Las últimas actualizaciones de desarrollo, lanzamientos de productos y novedades de nuestro equipo. Descubrí nuevos proyectos, tecnologías y todo lo que estamos construyendo.
                         </p>
                     </div>
                     <Button variant="action" subVariant="cta" to="/news">

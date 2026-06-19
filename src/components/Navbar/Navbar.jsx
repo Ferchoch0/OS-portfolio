@@ -37,7 +37,7 @@ export default function Navbar() {
     return (
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
             <Link to="/">
-                <img src="/img/branding/logo_blanco.png" alt="" className={styles.logo} />
+                <img src="/img/branding/logo_blanco.png" alt="otter.ly - Desarrollo de Software a Medida" className={styles.logo} />
             </Link>
 
             <button

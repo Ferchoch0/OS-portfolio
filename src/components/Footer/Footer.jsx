@@ -43,7 +43,7 @@ export default function Footer() {
                     )
                 ))}
             </div>
-            <span className={styles.copy}>© 2025 otter.ly</span>
+            <span className={styles.copy}>© {new Date().getFullYear()} otter.ly — Desarrollo de software a medida</span>
         </footer>
     );
 }

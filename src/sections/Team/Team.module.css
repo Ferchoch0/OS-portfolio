@@ -2,7 +2,7 @@
    SECCIÓN: NUESTRO EQUIPO (TEAM)
    ════════════════════════════════════════════ */
 .team-section {
-    padding: var(--section-pad-v) var(--section-pad-h);
+    padding: var(--section-pad-v) var(--section-pad-h) 140px;
     background-color: var(--paper, #fafafa);
     background-image:
         radial-gradient(var(--border, rgba(0, 0, 0, 0.03)) 1px, transparent 1px);

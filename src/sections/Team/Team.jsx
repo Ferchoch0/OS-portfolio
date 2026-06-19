@@ -60,10 +60,10 @@ export default function Team() {
 
                 {/* ── SUPERIOR: Título de la Sección ── */}
                 <div className={styles['team-top']}>
-                    <SectionBadge text="Nuestra esencia" centered />
+                    <SectionBadge text="Nuestro Equipo & Red de Talento" centered />
                     <h2 className={styles['team-main-title']}>
-                        Impulsando el futuro <br />
-                        <span className={styles['team-main-em']}>con talento y convicción.</span>
+                        Liderado por expertos, <br />
+                        <span className={styles['team-main-em']}>respaldado por talento especializado.</span>
                     </h2>
                 </div>
 
@@ -127,7 +127,7 @@ export default function Team() {
                         </div>
                         <div className={styles['divider-line']}></div>
                     </div>
-                    <h3 className={`${styles['decorated-subtitle']} reveal`} ref={revealRef}>El Corazón de <span>Otter</span></h3>
+                    <h3 className={`${styles['decorated-subtitle']} reveal`} ref={revealRef}>Liderazgo & <span>Dirección Técnica</span></h3>
                     <div className={styles['tm-cards-grid']}>
                         {team.map((member) => (
                             <TeamCard key={member.id} {...member} revealRef={revealRef} memberId={member.name.toLowerCase()} />

@@ -69,12 +69,77 @@
     border: 1px solid var(--border-light);
 }
 
+/* ── Scroll Hint Arrow ── */
+.floatingScrollHint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 50;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    animation: dropAndFade 3s ease-in-out infinite;
+}
+
+.scrollHintText {
+    font-family: var(--mono);
+    font-size: .65rem;
+    text-transform: uppercase;
+    letter-spacing: .15em;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.mouseIcon {
+    color: var(--muted);
+}
+
+.mouseWheel {
+    animation: scrollWheel 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(6px);
+        opacity: 0;
+    }
+}
+
+@keyframes dropAndFade {
+    0% {
+        transform: translate(-50%, calc(-50% - 20px));
+        opacity: 0;
+    }
+    20% {
+        transform: translate(-50%, -50%);
+        opacity: 0.6;
+    }
+    70% {
+        transform: translate(-50%, -50%);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(-50%, calc(-50% + 20px));
+        opacity: 0;
+    }
+}
+
 /* ── Nav buttons ── */
 .nav {
     border-right: 1px solid var(--border-light);
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .btn {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
