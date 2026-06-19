@@ -1,18 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { useScrollReveal } from '../../hooks/useScrollReveal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './ProjectsPreview.module.css';
 import { useScrollShrink } from '../../components/Image/ShrinkingHeader';
 import { getFeaturedProjects, getTotalProjectCount } from '../../data/projects';
 import TechBadge from '../../components/TechBadge/TechBadge';
-import ProjectModal from '../../components/ProjectModal/ProjectModal';
 import Button from '../../components/Button/Button';
 import SectionBadge from '../../components/SectionBadge/SectionBadge';
 
 export default function ProjectsPreview() {
+    const navigate = useNavigate();
     const { sectionRef, targetRef, progress, hasShrunk, rects } = useScrollShrink();
     const revealRef = useScrollReveal();
-    const [selectedProject, setSelectedProject] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
     const intervalRef = useRef(null);
@@ -89,7 +88,7 @@ export default function ProjectsPreview() {
                             ref={isLarge ? targetRef : null}
                             className={`${styles.card} ${isLarge ? styles.large : ''}`}
                             style={{ opacity: isPlaceholder ? 0 : 1, cursor: 'pointer' }}
-                            onClick={() => setSelectedProject(project)}
+                            onClick={() => navigate(`/project/${project.id}`)}
                         >
                             <div className={styles.thumb}>
                                 {hasImage ? (
@@ -131,7 +130,7 @@ export default function ProjectsPreview() {
                             <div
                                 key={project.id}
                                 className={styles.carouselSlide}
-                                onClick={() => setSelectedProject(project)}
+                                onClick={() => navigate(`/project/${project.id}`)}
                             >
                                 <div className={styles.thumb}>
                                     {hasImage ? (
@@ -205,7 +204,7 @@ export default function ProjectsPreview() {
                 <div
                     style={{ ...floatingStyle, cursor: 'pointer' }}
                     className={`${styles.card} ${styles.large}`}
-                    onClick={() => setSelectedProject(largeProject)}
+                    onClick={() => navigate(`/project/${largeProject.id}`)}
                 >
                     <div className={styles.thumb}>
                         {largeProject.images && largeProject.images.length > 0 ? (
@@ -242,12 +241,6 @@ export default function ProjectsPreview() {
                 </div>
             )}
 
-            {selectedProject && (
-                <ProjectModal
-                    project={selectedProject}
-                    onClose={() => setSelectedProject(null)}
-                />
-            )}
         </section>
     );
 }

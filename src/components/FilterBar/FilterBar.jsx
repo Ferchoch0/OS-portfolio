@@ -1,9 +1,7 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import styles from './FilterBar.module.css';
 
 export default function FilterBar({ categories, active, count, allProjects = [], onChange, searchQuery, onSearchChange }) {
-    const [displayCount, setDisplayCount] = useState(count);
-    const [flash, setFlash] = useState(false);
     const sidebarRef = useRef(null);
 
     // Per-category project counts
@@ -16,16 +14,6 @@ export default function FilterBar({ categories, active, count, allProjects = [],
         });
         return map;
     }, [categories, allProjects]);
-
-    // Animate the count number on change
-    useEffect(() => {
-        setFlash(true);
-        const t = setTimeout(() => {
-            setDisplayCount(count);
-            setFlash(false);
-        }, 300);
-        return () => clearTimeout(t);
-    }, [count]);
 
     // Magnetic effect logic
     const handleMouseMove = (e) => {

@@ -1,8 +1,9 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { useNavigate, useLocation, useOutlet } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { getProjectsForCatalog } from '../data/projects';
 import TechBadge from '../components/TechBadge/TechBadge';
 import styles from './ProjectsPage.module.css';
-import ProjectModal from '../components/ProjectModal/ProjectModal';
 import FilterBar from '../components/FilterBar/FilterBar';
 import SectionBadge from '../components/SectionBadge/SectionBadge';
 
@@ -352,9 +353,12 @@ function ProjectCarousel({ project, hasImage, paused }) { // ← agregar paused
 
 // ── Main Page ──
 export default function ProjectsPage() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const outlet = useOutlet();
+
     const [filter, setFilter] = useState('Todos');
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedProject, setSelectedProject] = useState(null);
     const allProjects = getProjectsForCatalog();
 
     const scrambledTitle = useScramble('proyectos', 600);
@@ -378,12 +382,14 @@ export default function ProjectsPage() {
         return result;
     }, [filter, searchQuery, allProjects]);
 
+    const isDetailOpen = !!outlet;
+
     return (
         <div className={styles.page}>
             {/* ── Hero Header ── */}
             <div className={styles.hero}>
                 {/* Animated grid background */}
-                <GridBackground paused={!!selectedProject} />
+                <GridBackground paused={isDetailOpen} />
 
                 <div className={styles.heroInner}>
                     <div className={styles.headerContent}>
@@ -416,7 +422,7 @@ export default function ProjectsPage() {
                     </div>
 
                     {/* ── 3D Devices ── */}
-                    <DeviceMockups projects={allProjects} paused={!!selectedProject} />
+                    <DeviceMockups projects={allProjects} paused={isDetailOpen} />
                 </div>
 
                 {/* Tech ticker at bottom of hero */}
@@ -451,11 +457,11 @@ export default function ProjectsPage() {
                                     key={project.id}
                                     className={styles.card}
                                     style={{ animationDelay: `${index * 0.08}s`, cursor: 'pointer' }}
-                                    onClick={() => setSelectedProject(project)}
+                                    onClick={() => navigate(`/project/${project.id}`)}
                                 >
                                     {/* Thumbnail */}
                                     <div className={styles.thumb}>
-                                        <ProjectCarousel project={project} hasImage={hasImage} paused={!!selectedProject} />
+                                        <ProjectCarousel project={project} hasImage={hasImage} paused={isDetailOpen} />
                                         <div className={styles.thumbOverlay}></div>
                                         <div className={styles.badgesWrapper}>
                                             <span className={styles.cat}>
@@ -509,12 +515,9 @@ export default function ProjectsPage() {
                 </div>
             </div>
 
-            {selectedProject && (
-                <ProjectModal
-                    project={selectedProject}
-                    onClose={() => setSelectedProject(null)}
-                />
-            )}
+            <AnimatePresence mode="wait">
+                {outlet ? React.cloneElement(outlet, { key: location.pathname }) : null}
+            </AnimatePresence>
         </div>
     );
 }

@@ -6,6 +6,7 @@ import TVNoise from './components/Background/TvNoise';
 
 const Home = lazy(() => import('./pages/Home'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
@@ -58,7 +59,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="project" element={<ProjectsPage />} />
+            <Route path="project" element={<ProjectsPage />}>
+              <Route path=":id" element={<ProjectDetail />} />
+            </Route>
             <Route path="news" element={<UpdatesPage />} />
             <Route path="contact" element={<ContactPage />} />
             <Route path="news" element={<UpdatesPage />} />
