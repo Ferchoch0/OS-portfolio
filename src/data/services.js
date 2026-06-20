@@ -55,7 +55,7 @@ export const services = [
     id: 3,
     num: '04',
     name: 'Web Apps & Productos SaaS',
-    desc: 'Desarrollo de productos digitales listos para el mercado: desde MVP hasta lanzamiento y crecimiento continuo. Tu idea convertida en un SaaS rentable.',
+    desc: 'Desarrollo e innovación de nuestros propios. Creamos plataformas digitales escalables diseñadas para optimizar la gestión y resolver problemas reales del mercado.',
     tags: ['SaaS', 'MVP', 'Deploy', 'AWS'],
     soon: false,
   },
