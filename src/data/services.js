@@ -55,7 +55,7 @@ export const services = [
     id: 3,
     num: '04',
     name: 'Web Apps & Productos SaaS',
-    desc: 'Desarrollo e innovación de nuestros propios. Creamos plataformas digitales escalables diseñadas para optimizar la gestión y resolver problemas reales del mercado.',
+    desc: 'Desarrollo e innovación de nuestros propios productos. Creamos plataformas digitales escalables diseñadas para optimizar la gestión y resolver problemas reales del mercado.',
     tags: ['SaaS', 'MVP', 'Deploy', 'AWS'],
     soon: false,
   },
